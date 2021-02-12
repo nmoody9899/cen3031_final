@@ -2,23 +2,8 @@ import React, { useState, useEffect } from "react";
 import { auth } from "../../firebase";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
-
-const createOrUpdateUser = async (authtoken) => {
-  return (
-    //endpoint for this request is /api/create-or-update-user
-    await axios.post(
-      `${process.env.REACT_APP_API}/create-or-update-user`,
-      {}, //body (pass product information here)
-      {
-        //passing token in header
-        headers: {
-          authtoken: authtoken,
-        },
-      }
-    )
-  );
-};
+import { createOrUpdateUser } from "../../functions/auth";
+//import axios from "axios";
 
 //from props - need history.push
 const RegisterComplete = ({ history }) => {

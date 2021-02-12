@@ -9,7 +9,9 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { Link } from "react-router-dom";
 
-import axios from "axios";
+import { createOrUpdateUser } from "../../functions/auth";
+
+//import axios from "axios"; now imported from functions/auth
 
 //we can destructure history from props because this is on the routing Route
 const Login = ({ history }) => {
@@ -28,22 +30,6 @@ const Login = ({ history }) => {
       history.push("/"); //push to the home page
     }
   }, [user]); //user is dependency here since it might take a moment to load user from firebase
-
-  const createOrUpdateUser = async (authtoken) => {
-    return (
-      //endpoint for this request is /api/create-or-update-user
-      await axios.post(
-        `${process.env.REACT_APP_API}/create-or-update-user`,
-        {}, //body (pass product information here)
-        {
-          //passing token in header
-          headers: {
-            authtoken: authtoken,
-          },
-        }
-      )
-    );
-  };
 
   const handleSubmit = async (event) => {
     //https://firebase.google.com/docs/auth/web/start

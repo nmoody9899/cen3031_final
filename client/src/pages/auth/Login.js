@@ -63,7 +63,7 @@ const Login = ({ history }) => {
             },
           });
         })
-        .catch();
+        .catch((err) => console.log(err));
 
       //   //we'll redirect here based on user role later
       history.push("/");
@@ -136,7 +136,7 @@ const Login = ({ history }) => {
               },
             });
           })
-          .catch();
+          .catch((err) => console.log(err));
         // dispatch({//expecting type and payload
         //     type: 'LOGGED_IN_USER',
         //     payload: {

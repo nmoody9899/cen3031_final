@@ -66,7 +66,7 @@ const RegisterComplete = ({ history }) => {
               },
             });
           })
-          .catch();
+          .catch((err) => console.log(err));
 
         //redirect (using home as standin) want a user dashboard
         history.push("/");

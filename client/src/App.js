@@ -16,6 +16,8 @@ import Header from "./components/nav/Header";
 import { auth } from "./firebase";
 import { useDispatch } from "react-redux";
 
+import { createOrUpdateUser, currentUser } from "./functions/auth";
+
 const App = () => {
   const dispatch = useDispatch();
 
@@ -30,14 +32,31 @@ const App = () => {
         const idTokenResult = await user.getIdTokenResult();
         console.log("user", user);
         //dispatch token to redux store (make sure you send all the user fields you need!!)
-        dispatch({
-          //expecting type and payload
-          type: "LOGGED_IN_USER",
-          payload: {
-            email: user.email,
-            token: idTokenResult.token,
-          },
-        });
+        // dispatch({
+        //   //expecting type and payload
+        //   type: "LOGGED_IN_USER",
+        //   payload: {
+        //     email: user.email,
+        //     token: idTokenResult.token,
+        //   },
+        // });
+
+        //currentUser not working at the moment... need to find out why
+        currentUser(idTokenResult.token)
+          .then((res) => {
+            dispatch({
+              //expecting type and payload
+              type: "LOGGED_IN_USER",
+              payload: {
+                name: res.data.name,
+                email: res.data.email,
+                token: idTokenResult.token,
+                role: res.data.role,
+                _id: res.data._id,
+              },
+            });
+          })
+          .catch((err) => console.log(err));
       }
     });
     //cleanup

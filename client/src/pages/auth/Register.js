@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { auth } from '../../firebase';
-import { toast } from 'react-toastify';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect } from "react";
+import { auth } from "../../firebase";
+import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
-import { Button } from 'antd';
-import { MailOutlined } from '@ant-design/icons';
-
+import { Button } from "antd";
+import { MailOutlined } from "@ant-design/icons";
 
 const Register = ({ history }) => {
   const [email, setEmail] = useState("");

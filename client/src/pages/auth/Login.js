@@ -19,8 +19,6 @@ const Login = ({ history }) => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  let dispatch = useDispatch();
-
   //destructure user from state
   const { user } = useSelector((state) => ({ ...state }));
 
@@ -30,6 +28,18 @@ const Login = ({ history }) => {
       history.push("/"); //push to the home page
     }
   }, [user]); //user is dependency here since it might take a moment to load user from firebase
+
+  let dispatch = useDispatch();
+
+  const roleBasedRedirect = (res) => {
+    if (res.data.role === "admin") {
+      //redirect to admin dashboard
+      history.push("/admin/dashboard");
+    } else {
+      //redirect to user dashboard
+      history.push("/user/history");
+    }
+  };
 
   const handleSubmit = async (event) => {
     //https://firebase.google.com/docs/auth/web/start
@@ -62,11 +72,13 @@ const Login = ({ history }) => {
               _id: res.data._id,
             },
           });
+          //redirect user based on role, sending response data
+          roleBasedRedirect(res);
         })
         .catch((err) => console.log(err));
 
       //   //we'll redirect here based on user role later
-      history.push("/");
+      //history.push("/"); //default place holder for now before dashboard
     } catch (error) {
       console.log(error);
       toast.error(error.message);
@@ -135,6 +147,7 @@ const Login = ({ history }) => {
                 _id: res.data._id,
               },
             });
+            roleBasedRedirect(res);
           })
           .catch((err) => console.log(err));
         // dispatch({//expecting type and payload
@@ -146,7 +159,7 @@ const Login = ({ history }) => {
         //   });
 
         //we'll redirect here based on user role later
-        history.push("/");
+        //history.push("/");
       })
       .catch((error) => {
         console.log(error);

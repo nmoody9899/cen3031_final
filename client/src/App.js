@@ -41,7 +41,6 @@ const App = () => {
         //   },
         // });
 
-        //currentUser not working at the moment... need to find out why
         currentUser(idTokenResult.token)
           .then((res) => {
             dispatch({

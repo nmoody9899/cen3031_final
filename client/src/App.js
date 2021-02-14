@@ -10,6 +10,7 @@ import RegisterComplete from "./pages/auth/RegisterComplete";
 import Home from "./pages/Home";
 import ForgotPassword from "./pages/auth/FogotPassword";
 import History from "./pages/user/History";
+import UserRoute from "./components/routes/UserRoute";
 
 //for navigation from ant Header
 import Header from "./components/nav/Header";
@@ -17,7 +18,7 @@ import Header from "./components/nav/Header";
 import { auth } from "./firebase";
 import { useDispatch } from "react-redux";
 
-import { createOrUpdateUser, currentUser } from "./functions/auth";
+import { currentUser } from "./functions/auth";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -62,7 +63,7 @@ const App = () => {
     //cleanup
 
     return () => unsubscribe();
-  }, []);
+  }, [dispatch]);
 
   return (
     //this is wrapped in index.js with BrowserRouter
@@ -75,7 +76,7 @@ const App = () => {
         <Route exact path="/register" component={Register} />
         <Route exact path="/register/complete" component={RegisterComplete} />
         <Route exact path="/forgot/password" component={ForgotPassword} />
-        <Route exact path="/user/history" component={History} />
+        <UserRoute exact path="/user/history" component={History} />
       </Switch>
     </React.Fragment>
   );

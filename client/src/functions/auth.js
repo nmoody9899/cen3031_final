@@ -18,7 +18,7 @@ export const createOrUpdateUser = async (authtoken) => {
 
 export const currentUser = async (authtoken) => {
   return (
-    //endpoint for this request is /api/create-or-update-user
+    //endpoint for this request is /api/curent-user
     await axios.post(
       `${process.env.REACT_APP_API}/current-user`,
       {}, //body (pass product information here)

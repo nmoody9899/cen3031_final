@@ -16,6 +16,6 @@ module.exports = {
     node: true,
   },
   rules: {
-    "comma-dangle": ["error", "always-multiline"],
+    "comma-dangle": ["error", "only-multiline"],
   },
 };

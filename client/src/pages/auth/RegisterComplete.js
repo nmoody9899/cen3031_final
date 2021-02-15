@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { auth } from "../../firebase";
 import { toast } from "react-toastify";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { createOrUpdateUser } from "../../functions/auth";
 //import axios from "axios";
+import PropTypes from "prop-types";
 
 //from props - need history.push
 const RegisterComplete = ({ history }) => {
@@ -11,7 +12,7 @@ const RegisterComplete = ({ history }) => {
   const [password, setPassword] = useState("");
 
   //destructure user from state
-  const { user } = useSelector((state) => ({ ...state }));
+  //const { user } = useSelector((state) => ({ ...state }));
 
   let dispatch = useDispatch();
 
@@ -112,6 +113,10 @@ const RegisterComplete = ({ history }) => {
       </div>
     </div>
   );
+};
+
+RegisterComplete.propTypes = {
+  history: PropTypes.object.isRequired,
 };
 
 export default RegisterComplete;

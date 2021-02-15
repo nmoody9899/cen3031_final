@@ -6,6 +6,8 @@ import { useSelector } from "react-redux";
 import { Button } from "antd";
 import { MailOutlined } from "@ant-design/icons";
 
+import PropTypes from "prop-types";
+
 const Register = ({ history }) => {
   const [email, setEmail] = useState("");
 
@@ -87,6 +89,10 @@ const Register = ({ history }) => {
       </div>
     </div>
   );
+};
+
+Register.propTypes = {
+  history: PropTypes.object.isRequired,
 };
 
 export default Register;

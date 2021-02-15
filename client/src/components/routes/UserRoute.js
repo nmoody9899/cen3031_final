@@ -1,5 +1,6 @@
 import React from "react";
-import { Route, Link } from "react-router-dom";
+import { Route } from "react-router-dom";
+import PropTypes from "prop-types";
 
 //need user state from Redux
 import { useSelector } from "react-redux";
@@ -16,6 +17,10 @@ const UserRoute = ({ children, ...rest }) => {
   ) : (
     <LoadingToRedirect />
   );
+};
+
+UserRoute.propTypes = {
+  children: PropTypes.object.isRequired,
 };
 
 export default UserRoute;

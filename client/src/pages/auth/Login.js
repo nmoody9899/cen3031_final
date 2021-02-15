@@ -11,6 +11,8 @@ import { Link } from "react-router-dom";
 
 import { createOrUpdateUser } from "../../functions/auth";
 
+import PropTypes from "prop-types";
+
 //import axios from "axios"; now imported from functions/auth
 
 //we can destructure history from props because this is on the routing Route
@@ -198,6 +200,10 @@ const Login = ({ history }) => {
       </div>
     </div>
   );
+};
+
+Login.propTypes = {
+  history: PropTypes.object.isRequired,
 };
 
 export default Login;

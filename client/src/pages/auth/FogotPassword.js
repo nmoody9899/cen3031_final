@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { useSelector } from "react-redux"; //if user is logged in they should not land here
 import { Button } from "antd";
 import { MailOutlined } from "@ant-design/icons";
+import PropTypes from "prop-types";
 
 const ForgotPassword = ({ history }) => {
   const [email, setEmail] = useState("");
@@ -78,6 +79,10 @@ const ForgotPassword = ({ history }) => {
       </form>
     </div>
   );
+};
+
+ForgotPassword.propTypes = {
+  history: PropTypes.object.isRequired,
 };
 
 export default ForgotPassword;

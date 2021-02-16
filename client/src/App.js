@@ -11,6 +11,8 @@ import Home from "./pages/Home";
 import ForgotPassword from "./pages/auth/FogotPassword";
 import History from "./pages/user/History";
 import UserRoute from "./components/routes/UserRoute";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminRoute from "./components/routes/AdminRoute";
 
 //for navigation from ant Header
 import Header from "./components/nav/Header";
@@ -19,6 +21,7 @@ import { auth } from "./firebase";
 import { useDispatch } from "react-redux";
 
 import { currentUser } from "./functions/auth";
+
 
 const App = () => {
   const dispatch = useDispatch();
@@ -77,6 +80,7 @@ const App = () => {
         <Route exact path="/register/complete" component={RegisterComplete} />
         <Route exact path="/forgot/password" component={ForgotPassword} />
         <UserRoute exact path="/user/history" component={History} />
+        <AdminRoute exact path="/admin/dashboard" component={AdminDashboard} />
       </Switch>
     </React.Fragment>
   );

@@ -31,3 +31,19 @@ export const currentUser = async (authtoken) => {
     )
   );
 };
+
+export const currentAdmin = async (authtoken) => {
+  return (
+    //endpoint for this request is /api/curent-user
+    await axios.post(
+      `${process.env.REACT_APP_API}/current-admin`,
+      {}, //body (pass product information here)
+      {
+        //passing token in header
+        headers: {
+          authtoken: authtoken,
+        },
+      }
+    )
+  );
+};

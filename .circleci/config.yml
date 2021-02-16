@@ -37,7 +37,7 @@ jobs:
             echo "The pwd is $PWD"
   test:
     docker: 
-      - image: circleci/node:14.5.5
+      - image: circleci/node:14.15.5-browsers
     steps:
       - checkout
       - run:

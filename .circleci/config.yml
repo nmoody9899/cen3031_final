@@ -35,6 +35,9 @@ jobs:
           command: |
             node -v
             echo "The pwd is $PWD"
+  test:
+    steps:
+      - checkout
       - run:
           name: Running custom tests
           command: |
@@ -50,3 +53,4 @@ workflows:
   test_my_app:
     jobs:
       - build
+      - test

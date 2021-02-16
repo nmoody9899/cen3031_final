@@ -82,7 +82,7 @@ const ForgotPassword = ({ history }) => {
 };
 
 ForgotPassword.propTypes = {
-  history: PropTypes.object.isRequired,
+  history: PropTypes.any.isRequired,
 };
 
 export default ForgotPassword;

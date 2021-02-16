@@ -20,7 +20,7 @@ const UserRoute = ({ children, ...rest }) => {
 };
 
 UserRoute.propTypes = {
-  children: PropTypes.object.isRequired,
+  children: PropTypes.any,
 };
 
 export default UserRoute;

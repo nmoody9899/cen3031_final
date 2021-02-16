@@ -55,7 +55,8 @@
     "collectCoverageFrom": [
       "src/{!(.eslintrc),}.js"
     ],
-    "snapshotSerializers": ["enzyme-to-json/serializer"]
+    "snapshotSerializers": ["enzyme-to-json/serializer"],
+    "setupFiles": [ "./src/setupTest.js" ]
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",

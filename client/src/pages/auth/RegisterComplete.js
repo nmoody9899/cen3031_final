@@ -116,7 +116,7 @@ const RegisterComplete = ({ history }) => {
 };
 
 RegisterComplete.propTypes = {
-  history: PropTypes.object.isRequired,
+  history: PropTypes.any.isRequired,
 };
 
 export default RegisterComplete;

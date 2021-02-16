@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 
 //middlewares
-const { authCheck } = require("../middlewares/auth");
+const { authCheck, adminCheck } = require("../middlewares/auth");
 
 //make sure to destructure here or the application crashes because it gets
 //object instead of function in call to router.get which requires a callback function
@@ -17,6 +17,8 @@ const { createOrUpdateUser, currentUser } = require("../controllers/auth");
 router.post("/create-or-update-user", authCheck, createOrUpdateUser);
 // create user endpoint (use in App)
 router.post("/current-user", authCheck, currentUser);
+//get response in front end
+router.post("/current-admin", authCheck, adminCheck, currentUser);
 
 //need to export from here to use in server.js
 module.exports = router;

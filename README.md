@@ -23,3 +23,5 @@ The information page will have integration through shared articles and social me
 ## Testimony Page
 
 User testimonials will be shared to this page, whether they are verified customers or valued visitors of the site's various resources.
+
+ADDED: client/server primitives with basic user authentication and token passing between front and back-end (to run locally you'll have to remote lock files and npm install in directory)

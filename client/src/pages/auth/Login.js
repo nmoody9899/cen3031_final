@@ -203,7 +203,7 @@ const Login = ({ history }) => {
 };
 
 Login.propTypes = {
-  history: PropTypes.any.isRequired,
+  history: PropTypes.any,
 };
 
 export default Login;

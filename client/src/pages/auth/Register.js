@@ -19,7 +19,7 @@ const Register = ({ history }) => {
     if (user && user.token) {
       history.push("/"); //push to the home page
     }
-  }, [user]); //user is dependency here since it might take a moment to load user from firebase
+  }, [user, history]); //user is dependency here since it might take a moment to load user from firebase
 
   const handleSubmit = async (event) => {
     //send email with a link to user after they register

@@ -40,7 +40,8 @@ jobs:
           background: true
           command: |
             cd ./server/TDD-Assignment/__tests__
-            npm ci
+            npm install -g mocha
+            npm install
             npm start
       
 

@@ -52,15 +52,6 @@ jobs:
             npm test
 
       - run:
-          name: other tests startup
-          background: true
-          command: |
-            cd ./server/TDD-Assignment/__tests__
-            sudo npm install -g mocha
-            sudo npm install
-            npm start forever
-
-      - run:
             name: other tests
             command: |
              cd ./server/TDD-Assignment/__tests__

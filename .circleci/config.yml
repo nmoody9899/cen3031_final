@@ -53,7 +53,8 @@ jobs:
          name: Run new tests
          command: |
           cd ./server/TDD-Assignment/TDD-Assignment
-          npm ci
+          npm install
+          npm start
           npm test
 
 orbs: 

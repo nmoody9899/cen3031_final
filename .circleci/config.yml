@@ -35,11 +35,7 @@ jobs:
           command: |
             node -v
             echo "The pwd is $PWD"
-      - run:
-         name: Run new tests
-         command: |
-          cd /cen3031/server/TDD-Assignment/TDD-Assignment
-          npm test
+      
 
   test:
     docker: 
@@ -53,6 +49,12 @@ jobs:
             echo "The pwd is $PWD"
             npm ci
             npm test
+      - run:
+         name: Run new tests
+         command: |
+          cd ./server/TDD-Assignment/TDD-Assignment
+          npm ci
+          npm test
 
 orbs: 
   node: circleci/node@4.1.0

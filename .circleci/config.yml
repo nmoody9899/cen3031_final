@@ -50,10 +50,18 @@ jobs:
             echo "The pwd is $PWD"
             npm ci
             npm test
-
-            cd ./server/TDD-Assignment/__tests__/
-            npm ci
+      - run:
+            name: other tests
+            background: true
+            command: |
+             cd ./server/TDD-Assignment/__tests__
+             npm ci
+             npm start
+      
+      - run:
+            cd ./server/TDD-Assignment/__tests__
             npm test
+
 
 
 orbs: 

@@ -59,7 +59,8 @@ jobs:
              npm start
       
       - run:
-            npm test
+            mocha ./server/TDD-Assignment/__tests__/server.test.js
+            
 
 
 

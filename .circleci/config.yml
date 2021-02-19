@@ -40,8 +40,8 @@ jobs:
           background: true
           command: |
             cd ./server/TDD-Assignment/__tests__
-            npm install -g mocha
-            npm install
+            sudo npm install -g mocha
+            sudo npm install
             npm start
       
 
@@ -62,8 +62,8 @@ jobs:
             name: other tests
             command: |
              cd ./server/TDD-Assignment/__tests__
-             npm install -g mocha
-             npm install
+             sudo npm install -g mocha
+             sudo npm install
              npm test
       
 

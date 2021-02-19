@@ -1,0 +1,4 @@
+--recursive
+--timeout 20000
+--reporter list
+--exit

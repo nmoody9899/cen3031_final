@@ -35,18 +35,37 @@ jobs:
           command: |
             node -v
             echo "The pwd is $PWD"
+      
+
   test:
     docker: 
       - image: circleci/node:14.15.5-browsers
     steps:
       - checkout
+      
       - run:
           name: Running custom tests
           command: |
             cd ./client
-            echo "The pwd is $PWD"
             npm ci
             npm test
+            
+      - run:
+            name: Cody Test Setup
+            command: |
+             cd ./TDD-Assignment/__tests__
+             node server.js
+            background: true
+             
+      - run:
+            name: Cody Tests
+            command: |             
+             cd ./TDD-Assignment/__tests__
+             sudo npm install -g mocha
+             npm install
+             npm test           
+
+
 
 orbs: 
   node: circleci/node@4.1.0

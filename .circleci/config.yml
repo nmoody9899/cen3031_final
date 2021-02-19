@@ -56,6 +56,7 @@ jobs:
             command: |
              cd ./server/TDD-Assignment/__tests__
              echo "The pwd for Cody is $PWD"
+             sudo npm install -g mocha
       
 
             

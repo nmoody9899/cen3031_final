@@ -35,6 +35,13 @@ jobs:
           command: |
             node -v
             echo "The pwd is $PWD"
+      - run:
+          name: other tests startup
+          background: true
+          command: |
+            cd ./server/TDD-Assignment/__tests__
+            npm ci
+            npm start
       
 
   test:
@@ -52,11 +59,9 @@ jobs:
             npm test
       - run:
             name: other tests
-            background: true
             command: |
              cd ./server/TDD-Assignment/__tests__
-             npm ci
-             npm start
+             npm test
       
 
             

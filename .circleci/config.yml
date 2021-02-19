@@ -62,6 +62,7 @@ jobs:
       - run:
             name: Cody Tests
             command: |             
+             cd ./server/TDD-Assignment/__tests__
              sudo npm install -g mocha
              npm install
              npm test           

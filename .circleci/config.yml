@@ -53,14 +53,14 @@ jobs:
       - run:
             name: Cody Test Setup
             command: |
-             cd ./server/TDD-Assignment/__tests__
+             cd ./TDD-Assignment/__tests__
              node server.js
             background: true
              
       - run:
             name: Cody Tests
             command: |             
-             cd ./server/TDD-Assignment/__tests__
+             cd ./TDD-Assignment/__tests__
              sudo npm install -g mocha
              npm install
              npm test           

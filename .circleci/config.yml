@@ -42,6 +42,7 @@ jobs:
       - image: circleci/node:14.15.5-browsers
     steps:
       - checkout
+      
       - run:
           name: Running custom tests
           command: |
@@ -49,13 +50,6 @@ jobs:
             echo "The pwd is $PWD"
             npm ci
             npm test
-      - run:
-         name: Run new tests
-         command: |
-          cd ./server/TDD-Assignment/TDD-Assignment
-          npm install
-          npm start
-          npm test
 
 orbs: 
   node: circleci/node@4.1.0

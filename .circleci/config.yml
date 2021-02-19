@@ -50,16 +50,21 @@ jobs:
             echo "The pwd is $PWD"
             npm ci
             npm test
-
+            
       - run:
-            name: other tests
+            name: Cody Test Setup
             command: |
              cd ./server/TDD-Assignment/__tests__
              echo "The pwd for Cody is $PWD"
+             node server.js
+            background: true
+             
+      - run:
+            name: Cody Tests
+            command: |             
              sudo npm install -g mocha
-      
-
-            
+             npm install
+             npm test           
 
 
 

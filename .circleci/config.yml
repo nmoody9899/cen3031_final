@@ -51,9 +51,6 @@ jobs:
             npm ci
             npm test
 
-            cd ./server/TDD-Assignment/TDD-Assignment
-            npm ci
-            npm test
 
 orbs: 
   node: circleci/node@4.1.0

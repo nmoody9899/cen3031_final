@@ -47,7 +47,6 @@ jobs:
           name: Running custom tests
           command: |
             cd ./client
-            echo "The pwd is $PWD"
             npm ci
             npm test
             
@@ -55,7 +54,6 @@ jobs:
             name: Cody Test Setup
             command: |
              cd ./server/TDD-Assignment/__tests__
-             echo "The pwd for Cody is $PWD"
              node server.js
             background: true
              

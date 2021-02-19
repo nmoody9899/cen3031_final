@@ -58,8 +58,7 @@ jobs:
              npm ci
              npm start
       
-      - run:
-            mocha ./server/TDD-Assignment/__tests__/server.test.js
+
             
 
 

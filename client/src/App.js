@@ -10,11 +10,17 @@ import RegisterComplete from "./pages/auth/RegisterComplete";
 import Home from "./pages/Home";
 import ForgotPassword from "./pages/auth/FogotPassword";
 import History from "./pages/user/History";
+import UserRoute from "./components/routes/UserRoute";
 import Password from "./pages/user/Password";
 import Wishlist from "./pages/user/Wishlist";
-import UserRoute from "./components/routes/UserRoute";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminRoute from "./components/routes/AdminRoute";
+//different pages for admin navigation
+import CategoryCreate from "./pages/admin/category/CategoryCreate";
+import CategoryUpdate from "./pages/admin/category/CategoryUpdate";
+import SubCategoryCreate from "./pages/admin/subcategory/SubCategoryCreate";
+import SubCategoryUpdate from "./pages/admin/subcategory/SubCategoryUpdate";
+import ProductCreate from "./pages/admin/product/ProductCreate";
 
 //for navigation from ant Header
 import Header from "./components/nav/Header";
@@ -23,7 +29,6 @@ import { auth } from "./firebase";
 import { useDispatch } from "react-redux";
 
 import { currentUser } from "./functions/auth";
-
 
 const App = () => {
   const dispatch = useDispatch();
@@ -85,6 +90,27 @@ const App = () => {
         <UserRoute exact path="/user/password" component={Password} />
         <UserRoute exact path="/user/wishlist" component={Wishlist} />
         <AdminRoute exact path="/admin/dashboard" component={AdminDashboard} />
+        <AdminRoute exact path="/admin/category" component={CategoryCreate} />
+        <AdminRoute
+          exact
+          path="/admin/category/:slug" //slug of category comes from url
+          component={CategoryUpdate}
+        />
+        <AdminRoute
+          exact
+          path="/admin/subcategory"
+          component={SubCategoryCreate}
+        />
+        <AdminRoute
+          exact
+          path="/admin/subcategory/:slug" //slug of category comes from url
+          component={SubCategoryUpdate}
+        />
+        <AdminRoute
+          exact
+          path="/admin/product" //slug of category comes from url
+          component={ProductCreate}
+        />
       </Switch>
     </React.Fragment>
   );

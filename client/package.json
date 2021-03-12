@@ -5,19 +5,34 @@
   "dependencies": {
     "@ant-design/icons": "^4.4.0",
     "@babel/cli": "^7.12.16",
+    "@fontsource/blackout-midnight": "^4.2.1",
+    "@fontsource/knewave": "^4.2.2",
+    "@fontsource/mononoki": "^4.2.1",
+    "@fontsource/plus-jakarta-sans": "^4.2.1",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "antd": "^4.12.2",
     "axios": "^0.21.1",
     "firebase": "^8.2.6",
+    "lodash": "^4.17.21",
+    "lodash-es": "^4.17.21",
+    "lodash-move": "^1.1.1",
+    "medium-zoom": "^1.0.6",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-image-file-resizer": "^0.4.2",
+    "react-modal-image": "^2.5.0",
     "react-redux": "^7.2.2",
+    "react-responsive-carousel": "^3.2.13",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.2",
+    "react-spring": "^8.0.27",
+    "react-star-ratings": "^2.3.0",
     "react-toastify": "^7.0.3",
+    "react-typing-effect": "^2.0.5",
+    "react-use-gesture": "^9.1.2",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "web-vitals": "^1.0.1"
@@ -26,7 +41,6 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "jest",
-    "test:watch": "npm test -- --watch",
     "lint": "eslint . && prettier-eslint --list-different **/*.js",
     "format": "prettier-eslint --write **/*.js",
     "eject": "react-scripts eject"
@@ -61,7 +75,21 @@
     ],
     "setupFiles": [
       "./src/setupTest.js"
-    ]
+    ],
+    "reporters": [
+      "default",
+      "jest-junit"
+    ],
+    "testResultsProcessor": "jest-junit"
+  },
+  "jest-junit": {
+    "suiteName": "jest tests",
+    "outputDirectory": ".",
+    "outputName": "test-results/junit.xml",
+    "classNameTemplate": "{classname}-{title}",
+    "titleTemplate": "{classname}-{title}",
+    "ancestorSeparator": " › ",
+    "usePathForSuiteName": "true"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
@@ -76,9 +104,8 @@
     "eslint-plugin-jest": "^24.1.3",
     "eslint-plugin-react": "^7.22.0",
     "jest": "^26.6.0",
+    "jest-junit": "^12.0.0",
     "prettier-eslint-cli": "^5.0.0",
-    "react-test-renderer": "^17.0.1",
-    "redux-mock-store": "^1.5.4",
-    "redux-thunk": "^2.3.0"
+    "react-test-renderer": "^17.0.1"
   }
 }

@@ -26,20 +26,31 @@ const Login = ({ history }) => {
 
   //useEffect will run when component mounts or state changes parameters (function, dependency_array)
   useEffect(() => {
-    if (user && user.token) {
-      history.push("/"); //push to the home page
+    let intended = history.location.state;
+    if (intended) {
+      return; //this blocks the rest running
+    } else {
+      if (user && user.token) {
+        history.push("/"); //push to the home page
+      }
     }
   }, [user, history]); //user is dependency here since it might take a moment to load user from firebase
 
   let dispatch = useDispatch();
 
   const roleBasedRedirect = (res) => {
-    if (res.data.role === "admin") {
-      //redirect to admin dashboard
-      history.push("/admin/dashboard");
+    //redirect to page the user came from (intended)
+    let intended = history.location.state;
+    if (intended) {
+      history.push(intended.from);
     } else {
-      //redirect to user dashboard
-      history.push("/user/history");
+      if (res.data.role === "admin") {
+        //redirect to admin dashboard
+        history.push("/admin/dashboard");
+      } else {
+        //redirect to user dashboard
+        history.push("/user/history");
+      }
     }
   };
 
@@ -203,7 +214,7 @@ const Login = ({ history }) => {
 };
 
 Login.propTypes = {
-  history: PropTypes.any,
+  history: PropTypes.any.isRequired,
 };
 
 export default Login;

@@ -44,7 +44,8 @@ const SingleProduct = ({ product, onStarClick, star }) => {
         count: 1, //add a count property
       });
       //make sure we don't save duplicates using lodash helper
-      let unique = _.uniqWith(cart, _.isEqual);
+      //let unique = _.uniqWith(cart, _.isEqual);
+      let unique = _.uniqBy(cart, (i) => JSON.stringify([i._id]));
       console.log("unique", unique);
       //save to local storage
       localStorage.setItem("cart", JSON.stringify(unique));

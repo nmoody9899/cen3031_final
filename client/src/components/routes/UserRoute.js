@@ -1,5 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
+import PropTypes from "prop-types";
 
 //need user state from Redux
 import { useSelector } from "react-redux";
@@ -11,12 +12,11 @@ const UserRoute = ({ ...rest }) => {
   const { user } = useSelector((state) => ({ ...state }));
 
   //might want to show a loading message
-  return user && user.token ? (
-    <Route {...rest} />
-  ) : (
-    <LoadingToRedirect />
-  );
+  return user && user.token ? <Route {...rest} /> : <LoadingToRedirect />;
 };
 
+UserRoute.propTypes = {
+  children: PropTypes.any,
+};
 
 export default UserRoute;

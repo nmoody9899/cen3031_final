@@ -6,9 +6,11 @@ import {
 import { Link } from "react-router-dom";
 import formatMoney from "../functions/formatMoney";
 import ProductCardInCheckout from "../components/cards/ProductCardInCheckout";
+import PropTypes from "prop-types";
+import { userCart } from "../functions/user";
 
 //if you use a curly brace in component make sure you use return
-const Cart = () => {
+const Cart = ({ history }) => {
   //access redux
   const { user, cart } = useSelector((state) => ({ ...state }));
   //const dispatch = useDispatch();
@@ -19,7 +21,21 @@ const Cart = () => {
     }, 0);
   };
 
-  const saveOrderToDb = () => {};
+  const saveOrderToDb = () => {
+    console.log("Saving order to db", JSON.stringify(cart, null, 4));
+    userCart(cart, user.token)
+      .then((res) => {
+        console.log("CART POST RESPONSE", res);
+        if (res.data.ok) {
+          //if response is good then redirect user to checkout page
+          history.push("/checkout");
+        }
+      })
+      .catch((err) => console.log("CART SAVE ERR", err));
+    // console.log("cart from redux checkout", JSON.stringify(cart, null, 4));
+    //alert("saveOrderToDb");
+    //redirect to checkout page
+  };
 
   const showCartItems = () => (
     <table className="table table-bordered">
@@ -98,6 +114,10 @@ const Cart = () => {
       </div>
     </div>
   );
+};
+
+Cart.propTypes = {
+  history: PropTypes.any,
 };
 
 export default Cart;

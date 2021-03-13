@@ -48,6 +48,7 @@ import Shop from "./pages/Shop";
 
 //Cart
 import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
 
 //for navigation from ant Header
 import Header from "./components/nav/Header";
@@ -190,6 +191,8 @@ const App = () => {
         <Route exact path="/brand/:slug" component={BrandHome} />
         <Route exact path="/shop" component={Shop} />
         <Route exact path="/cart" component={Cart} />
+        {/* {Right now the checkout process is guarded here and on the Cart/Checkout page with user ?, but we can remove this so anyone can checkout} */}
+        <UserRoute exact path="/checkout" component={Checkout} />
       </Switch>
     </React.Fragment>
   );

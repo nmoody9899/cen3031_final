@@ -20,7 +20,7 @@ const SideDrawer = () => {
       className="text-center"
       title={`Cart | ${cart.length} Items`}
       placement="right"
-      //closeable={false} //hide close icon
+      //closeable="false" //hide close icon
       onClose={() => {
         dispatch({
           type: "SET_VISIBLE",

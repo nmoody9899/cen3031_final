@@ -31,13 +31,15 @@ const ProductCard = ({ product }) => {
         cart = JSON.parse(localStorage.getItem("cart")); //need to get data as JSON object
       }
       //otherwise create one
+      console.log("cart before push product:", cart);
       //push new product object to cart
       cart.push({
         ...product, //spread to get values as part of product
         count: 1, //add a count property
       });
+      console.log("cart after push product:", cart);
       //make sure we don't save duplicates using lodash helper
-      // let unique = _.uniqWith(cart, _.isEqual);
+      //let unique = _.uniqWith(cart, _.isEqual);
       let unique = _.uniqBy(cart, (i) => JSON.stringify([i._id]));
       console.log("unique", unique);
       //save to local storage

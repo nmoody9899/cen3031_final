@@ -11,7 +11,7 @@ const Jumbotron = () => {
         <b
           className="display-2"
           style={{
-            fontFamily: "blackout-midnight",
+            fontFamily: "plus-jakarta-sans",
             fontWeight: "bold",
             color: "#b03a1e",
           }}
@@ -19,16 +19,15 @@ const Jumbotron = () => {
           Consider Herbs{" "}
         </b>
 
-        <b>
-          <i
-            style={{
-              fontFamily: "knewave",
-              fontWeight: "bold",
-              color: "#6b9b3c",
-            }}
-          >
-            Market
-          </i>
+        <b
+          className="display-2"
+          style={{
+            fontFamily: "plus-jakarta-sans",
+            fontWeight: "bold",
+            color: "#6b9b3c",
+          }}
+        >
+          Market
         </b>
       </h1>
       <ReactTypingEffect

@@ -9,6 +9,7 @@ import {
 } from "react-redux";
 import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 // import { toast } from "react-toastify";
+import formatMoney from "../../functions/formatMoney";
 
 const History = () => {
   const [orders, setOrders] = useState([]);
@@ -16,7 +17,10 @@ const History = () => {
 
   const loadUserOrders = () => {
     getUserOrders(user.token).then((res) => {
-      console.log(JSON.stringify(res.data, null, 4));
+      console.log(
+        "user orders returned -----> ",
+        JSON.stringify(res.data, null, 4)
+      );
       setOrders(res.data);
     });
   };
@@ -29,21 +33,29 @@ const History = () => {
     <table className="table table-bordered">
       <thead className="thead-light">
         <tr>
-          <th scope="col">Title</th>
-          <th scope="col">Price</th>
-          {/* <th scope="col">Brand</th> */}
-          <th scope="col">Count</th>
-          <th scope="col">Shipping</th>
+          <th className="font-weight-bold" scope="col">
+            Title
+          </th>
+          <th className="font-weight-bold" scope="col">
+            Price
+          </th>
+          <th className="font-weight-bold" scope="col">
+            Brand
+          </th>
+          <th className="font-weight-bold" scope="col">
+            Count
+          </th>
+          <th className="font-weight-bold" scope="col">
+            Shipping
+          </th>
         </tr>
       </thead>
       <tbody>
         {order.products.map((p, i) => (
           <tr key={i}>
-            <td>
-              <b>{p.product.title}</b>
-            </td>
-            <td>{p.product.price}</td>
-            {/* <td>{getBrandName(p.product.brand)}</td> */}
+            <td className="font-weight-bold">{p.product.title}</td>
+            <td>${formatMoney(p.product.price)}</td>
+            <td>{p.product.brand.name}</td>
             <td>{p.count}</td>
             <td>
               {p.product.shipping === "yes" ? (
@@ -61,6 +73,7 @@ const History = () => {
   const showOrders = () =>
     orders.map((order, i) => (
       <div key={i} className="m-5 p-3 card">
+        <p>{order.createdAt}</p>
         <p>Show payment info</p>
         {showOrderInTable(order)}
         <div className="row">

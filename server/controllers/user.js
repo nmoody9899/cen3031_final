@@ -182,8 +182,21 @@ exports.getUserOrders = async (req, res) => {
   let user = await User.findOne({ email: req.user.email }).exec();
   //query orders with this user
   let userOrders = await Order.find({ orderedBy: user._id })
-    .populate("products.product", "_id title price brand")
+    .populate("products.product")
+    // .exec();
+    .populate({
+      path: "products.product",
+      populate: {
+        path: "brand",
+        model: "Brand",
+      },
+    })
     .exec();
+
+  console.log(
+    "user orders in getUserOrders",
+    JSON.stringify(userOrders, null, 4)
+  );
 
   res.json(userOrders);
 };

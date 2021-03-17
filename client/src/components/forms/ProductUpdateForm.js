@@ -38,7 +38,7 @@ const ProductUpdateForm = ({
     formortype,
     category, //text
     herbList,
-    ingredient,
+    //ingredient,
     //subcategory, //array
     quantity, //number
     // image, //array
@@ -238,7 +238,7 @@ const ProductUpdateForm = ({
 
       <br />
 
-      {JSON.stringify(ingredient)}
+      {/* {JSON.stringify(ingredient)} */}
       <div onMouseMoveCapture={loadHerbList}>
         <label>Main Ingredients</label>
         <Select

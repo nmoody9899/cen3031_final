@@ -6,6 +6,9 @@ export const getBrands = async () =>
 export const getBrand = async (slug) =>
   await axios.get(`${process.env.REACT_APP_API}/brand/${slug}`);
 
+// export const getBrandId = async (id) =>
+//   await axios.get(`${process.env.REACT_APP_API}/brand/${id}`);
+
 export const removeBrand = async (slug, authtoken) =>
   await axios.delete(`${process.env.REACT_APP_API}/brand/${slug}`, {
     headers: {

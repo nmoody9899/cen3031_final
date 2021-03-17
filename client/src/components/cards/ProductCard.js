@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import herbprodimgdefault from "../../images/herb_product.png";
 import { Card, Tooltip } from "antd";
-import { EyeOutlined, ShoppingCartOutlined } from "@ant-design/icons";
+import {
+  EyeOutlined,
+  ShoppingCartOutlined,
+  InfoCircleOutlined,
+} from "@ant-design/icons";
 import { Link } from "react-router-dom";
 const { Meta } = Card;
 import { showAverageRating } from "../../functions/rating";
@@ -91,9 +95,18 @@ const ProductCard = ({ product }) => {
             <EyeOutlined className="text-primary" /> <br /> View Product
           </Link>,
           <Tooltip key={2} title={tooltip}>
-            <a onClick={handleAddToCart}>
-              <ShoppingCartOutlined key={2} className="text-success" /> <br />{" "}
-              Add to Cart
+            <a onClick={handleAddToCart} disabled={product.quantity < 1}>
+              {product.quantity < 1 ? (
+                <>
+                  <InfoCircleOutlined key={2} className="text-danger" /> <br />{" "}
+                  Out of Stock
+                </>
+              ) : (
+                <>
+                  <ShoppingCartOutlined key={2} className="text-success" />{" "}
+                  <br /> Add To Cart
+                </>
+              )}
             </a>
             ,
           </Tooltip>,

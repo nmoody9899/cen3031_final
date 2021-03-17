@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getUserCart, emptyUserCart, saveUserAddress } from "../functions/user";
+import {
+  getUserCart,
+  emptyUserCart,
+  saveUserAddress,
+  applyCoupon,
+} from "../functions/user";
 import formatMoney from "../functions/formatMoney";
 import { toast } from "react-toastify";
 import "react-quill/dist/quill.snow.css";
 //import ReactQuill from "react-quill";
 import AddressEntryForm from "../components/forms/AddressEntryForm";
+import PropTypes from "prop-types";
 
 const initialAddressState = {
   street: "",
@@ -14,11 +20,15 @@ const initialAddressState = {
   zip: "",
 };
 
-const Checkout = () => {
+const Checkout = ({ history }) => {
+  //Checkout is a page so we have access to history from props (console.log props if interested)
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState(0);
   const [address, setAddress] = useState(initialAddressState);
   const [addressSaved, setAddressSaved] = useState(false);
+  const [coupon, setCoupon] = useState("");
+  const [totalAfterDiscount, setTotalAfterDiscount] = useState(0);
+  const [discountErr, setDiscountErr] = useState("");
 
   const dispatch = useDispatch();
   const { user } = useSelector((state) => ({ ...state }));
@@ -59,6 +69,8 @@ const Checkout = () => {
       console.log(res);
       setProducts([]); //clear out products in state
       setTotal(0);
+      setTotalAfterDiscount(0);
+      setCoupon("");
       toast.success("Cart has been emptied. Continue shopping.");
     });
   };
@@ -69,6 +81,68 @@ const Checkout = () => {
     //console.log(e.target.name);
     setAddress({ ...address, [e.target.name]: e.target.value });
     //console.log(e.target.name, "=====", e.target.value);
+  };
+
+  const showProductSummary = () => {
+    return products.map((p, i) => (
+      <div key={i}>
+        <p>
+          {p.product.title} x ({p.count}) ={" "}
+          {formatMoney(p.product.price * p.count)}
+        </p>
+      </div>
+    ));
+  };
+
+  const handleCouponApply = () => {
+    //console.log("COUPON TO CHECK AND APPLY", coupon);
+    applyCoupon(user.token, coupon).then((res) => {
+      console.log("RES ON COUPON APPLIED", res.data);
+      if (res.data) {
+        setTotalAfterDiscount(res.data);
+        //update redux coupon applied to show whether coupon applied
+        dispatch({
+          type: "COUPON_APPLIED", //<--- from couponReducer
+          payload: true,
+        });
+      }
+      //error
+      if (res.data.err) {
+        setDiscountErr(res.data.err);
+        //update redux coupon applied
+        dispatch({
+          type: "COUPON_APPLIED", //<--- from couponReducer
+          payload: false,
+        });
+      }
+    });
+  };
+
+  const showApplyCoupon = () => {
+    return (
+      <>
+        {/* {JSON.stringify(totalAfterDiscount)} */}
+        {/* JSON.stringify(discountErr)} */}
+        {/* {JSON.stringify(props, null, 4)} */}
+
+        <input
+          className="form-control"
+          type="text"
+          value={coupon}
+          onChange={(e) => {
+            setCoupon(e.target.value);
+            setDiscountErr("");
+          }}
+        />
+        <button className="btn btn-primary mt-2" onClick={handleCouponApply}>
+          Apply
+        </button>
+        <br />
+        <div>
+          {discountErr && <p className="bg-danger pt-2">{discountErr}</p>}
+        </div>
+      </>
+    );
   };
 
   return (
@@ -88,29 +162,27 @@ const Checkout = () => {
         <hr />
         <h4>Got Coupon?</h4>
         <br />
-        coupon input and apply button
+        {showApplyCoupon()}
       </div>
       <div className="col-md-6">
         <h4>Order Summary</h4>
         <hr />
         <p>Products {products.length}</p>
         <hr />
-        {products.map((p, i) => (
-          <div key={i}>
-            <p>
-              {p.product.title} x ({p.count}) ={" "}
-              {formatMoney(p.product.price * p.count)}
-            </p>
-          </div>
-        ))}
+        {showProductSummary()}
         <hr />
         <p>Cart Total: ${formatMoney(total)}</p>
-
+        {totalAfterDiscount > 0 && (
+          <p className="bg-success">
+            Discount Applied! New Total: ${formatMoney(totalAfterDiscount)}
+          </p>
+        )}
         <div className="row">
           <div className="col-md-6">
             <button
               disabled={!addressSaved || !products.length}
               className="btn btn-primary mt-2"
+              onClick={() => history.push("/payment")}
             >
               Place Order
             </button>
@@ -128,6 +200,10 @@ const Checkout = () => {
       </div>
     </div>
   );
+};
+
+Checkout.propTypes = {
+  history: PropTypes.any,
 };
 
 export default Checkout;

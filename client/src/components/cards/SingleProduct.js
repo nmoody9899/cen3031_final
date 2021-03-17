@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { Card, Tabs, Tooltip } from "antd";
 import { Link } from "react-router-dom";
-import { HeartOutlined, ShoppingCartOutlined } from "@ant-design/icons";
+import {
+  HeartOutlined,
+  ShoppingCartOutlined,
+  InfoCircleOutlined,
+} from "@ant-design/icons";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import herbprodimgdefault from "../../images/herb_product.png";
@@ -135,9 +139,18 @@ const SingleProduct = ({ product, onStarClick, star }) => {
         <Card
           actions={[
             <Tooltip key={1} title={tooltip}>
-              <a onClick={handleAddToCart}>
-                <ShoppingCartOutlined key={2} className="text-success" /> <br />{" "}
-                Add to Cart
+              <a onClick={handleAddToCart} disabled={product.quantity < 1}>
+                {product.quantity < 1 ? (
+                  <>
+                    <InfoCircleOutlined key={2} className="text-danger" />{" "}
+                    <br /> Out of Stock
+                  </>
+                ) : (
+                  <>
+                    <ShoppingCartOutlined key={2} className="text-success" />{" "}
+                    <br /> Add To Cart
+                  </>
+                )}
               </a>
               ,
             </Tooltip>,

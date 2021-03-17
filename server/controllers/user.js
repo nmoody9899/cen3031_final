@@ -1,6 +1,8 @@
 const User = require("../models/user");
 const Product = require("../models/product");
 const Cart = require("../models/cart");
+const Coupon = require("../models/coupon");
+const Order = require("../models/order");
 
 exports.userCart = async (req, res) => {
   //cart will come in request body
@@ -95,4 +97,93 @@ exports.saveAddress = async (req, res) => {
   ).exec();
 
   res.json({ ok: true }); //if we receive ok(true) on front end then the save was successful
+};
+
+exports.applyCouponToUserCart = async (req, res) => {
+  const { coupon } = req.body;
+  console.log("COUPON", coupon);
+
+  const validCoupon = await Coupon.findOne({
+    $and: [{ name: coupon }, { expiry: { $gte: new Date() } }],
+  }).exec();
+  if (validCoupon === null) {
+    return res.json({
+      err: "Invalid coupon",
+    });
+  }
+  console.log("VALID COUPON", validCoupon);
+
+  const user = await User.findOne({ email: req.user.email }).exec();
+
+  let { cartTotal } = await Cart.findOne({ orderedBy: user._id })
+    .populate("products.product", "_id title price brand")
+    .exec();
+
+  //const products = cart.products; //make it easier to handle on front-end
+  //const cartTotal = cart.cartTotal;
+  //const totalAfterDiscount = cart.totalAfterDiscount;
+
+  console.log("cartTotal", cartTotal, "discount%", validCoupon.discount);
+
+  // calculate the total after discount
+  const totalAfterDiscount = (
+    cartTotal -
+    (cartTotal * validCoupon.discount) / 100
+  ).toFixed(2); // 99.99
+
+  console.log("TOTAL AFTER DISCOUNT ------> ", totalAfterDiscount);
+
+  Cart.findOneAndUpdate(
+    { orderedBy: user._id },
+    { totalAfterDiscount: totalAfterDiscount }, //since field name and variable are same name just use one instead of totalAfterDiscount: totalAfterDiscount
+    { new: true }
+  ).exec();
+
+  res.json(totalAfterDiscount);
+};
+
+exports.createOrder = async (req, res) => {
+  const { paymentIntent } = req.body.stripeResponse;
+  const user = await User.findOne({ email: req.user.email }).exec(); //need user for cart and token
+  //save cart items as order and then empty cart
+  let { products } = await Cart.findOne({ orderedBy: user._id }).exec();
+
+  let newOrder = await new Order({
+    products,
+    paymentIntent,
+    orderedBy: user._id,
+  }).save();
+
+  //order saved so now decrement quantity available, increment number of item sold (these are both available in product model) and come from cart count
+  let bulkOption = products.map((item) => {
+    return {
+      updateOne: {
+        filter: { _id: item.product._id }, //IMPORTANT! item.product
+        update: { $inc: { quantity: -item.count, sold: +item.count } },
+      },
+    };
+  });
+
+  //Product.bulkWrite({})
+  //now apply bulk operation to products
+  let updated = await Product.bulkWrite(bulkOption, {});
+
+  console.log(
+    "PRODUCTS QUANTITY DECREMENTED AND SOLD INCREMENTED------>",
+    updated
+  );
+
+  console.log("NEW ORDER SAVED", newOrder);
+
+  res.json({ ok: true });
+};
+
+exports.getUserOrders = async (req, res) => {
+  let user = await User.findOne({ email: req.user.email }).exec();
+  //query orders with this user
+  let userOrders = await Order.find({ orderedBy: user._id })
+    .populate("products.product", "_id title price brand")
+    .exec();
+
+  res.json(userOrders);
 };

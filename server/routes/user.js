@@ -10,6 +10,9 @@ const {
   getUserCart,
   emptyCart,
   saveAddress,
+  applyCouponToUserCart,
+  createOrder,
+  getUserOrders,
 } = require("../controllers/user");
 
 //we have user in client, now we need to check on back
@@ -28,6 +31,12 @@ router.get("/user/cart", authCheck, getUserCart);
 router.delete("/user/cart", authCheck, emptyCart);
 
 router.post("/user/address", authCheck, saveAddress);
+
+router.post("/user/cart/coupon", authCheck, applyCouponToUserCart);
+
+router.post("/user/order", authCheck, createOrder);
+
+router.get("/user/orders", authCheck, getUserOrders);
 
 //need to export from here to use in server.js
 module.exports = router;

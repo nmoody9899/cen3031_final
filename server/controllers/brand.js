@@ -70,3 +70,10 @@ exports.remove = async (req, res) => {
     res.status(400).send("Delete brand failed"); //status can be used to set error messages front end
   }
 };
+
+// exports.readId = async (req, res) => {
+//   console.log("readId getting req.params.id", req.params.id);
+//   const brand = await Brand.findById({ _id: req.params.id }).exec();
+
+//   res.json(brand);
+// };

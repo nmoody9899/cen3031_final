@@ -49,6 +49,8 @@ import Shop from "./pages/Shop";
 //Cart
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
+import CreateCouponPage from "./pages/admin/coupon/CreateCouponPage";
+import Payment from "./pages/Payment";
 
 //for navigation from ant Header
 import Header from "./components/nav/Header";
@@ -184,6 +186,7 @@ const App = () => {
           path="/admin/ingredient/:slug" //slug of category comes from url
           component={IngredientUpdate}
         />
+
         <Route exact path="/product/:slug" component={Product} />
         <Route exact path="/category/:slug" component={CategoryHome} />
         <Route exact path="/ingredient/:slug" component={Ingredient} />
@@ -193,6 +196,12 @@ const App = () => {
         <Route exact path="/cart" component={Cart} />
         {/* {Right now the checkout process is guarded here and on the Cart/Checkout page with user ?, but we can remove this so anyone can checkout} */}
         <UserRoute exact path="/checkout" component={Checkout} />
+        <AdminRoute
+          exact
+          path="/admin/coupon" //slug of category comes from url
+          component={CreateCouponPage}
+        />
+        <UserRoute exact path="/payment" component={Payment} />
       </Switch>
     </React.Fragment>
   );

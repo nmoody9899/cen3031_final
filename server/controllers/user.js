@@ -191,6 +191,7 @@ exports.getUserOrders = async (req, res) => {
         model: "Brand",
       },
     })
+    .sort({ createdAt: -1 })
     .exec();
 
   console.log(

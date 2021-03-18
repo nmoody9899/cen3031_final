@@ -10,6 +10,12 @@ import {
 import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
 // import { toast } from "react-toastify";
 import formatMoney from "../../functions/formatMoney";
+import ShowPaymentInfo from "../../components/cards/ShowPaymentInfo";
+import {
+  PDFDownloadLink,
+  //PDFViewer,
+} from "@react-pdf/renderer";
+import Invoice from "../../components/order/Invoice";
 
 const History = () => {
   const [orders, setOrders] = useState([]);
@@ -70,16 +76,43 @@ const History = () => {
     </table>
   );
 
+  // const showOrderDate = (order) => {
+  //   let { createdAt } = order;
+  //   let newDate = new Date(createdAt);
+  //   let displayDate = newDate.toUTCString();
+
+  //   // console.log("createdAt in showOrderDate:", createdAt);
+  //   // console.log("typeof createdAt in showOrderDate:", typeof createdAt);
+  //   // console.log("displayDate in showOrderDate:", displayDate);
+  //   // console.log("typeof displayDate in showOrderDate:", typeof displayDate);
+
+  //   return (
+  //     <div className="mb-1">
+  //       <b>Order Placed On:</b> {displayDate}
+  //     </div>
+  //   );
+  // };
+
+  const showPDFDownload = (order) => {
+    return (
+      <PDFDownloadLink
+        document={<Invoice order={order} />}
+        fileName="ConsiderHerbsInvoice.pdf"
+        className="btn btn-sm btn-block btn-outline-primary"
+      >
+        Download PDF
+      </PDFDownloadLink>
+    );
+  };
+
   const showOrders = () =>
     orders.map((order, i) => (
       <div key={i} className="m-5 p-3 card">
-        <p>{order.createdAt}</p>
-        <p>Show payment info</p>
+        {/* <div>{showOrderDate(order)}</div> */}
+        <ShowPaymentInfo order={order} />
         {showOrderInTable(order)}
         <div className="row">
-          <div className="col">
-            <p>PDF DOWNLOAD</p>
-          </div>
+          <div className="col">{showPDFDownload(order)}</div>
         </div>
       </div>
     ));

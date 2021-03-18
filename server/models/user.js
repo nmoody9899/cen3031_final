@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema(
       state: String,
       zip: String,
     },
-    //wishlist: [{type: ObjectId, ref: "Product"}],//Product model needed
+    wishlist: [{ type: ObjectId, ref: "Product" }], //Product model needed
   },
   { timestamps: true }
 ); //adding timestamps so that date/update date autopopulate

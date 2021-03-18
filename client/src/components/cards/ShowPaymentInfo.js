@@ -2,12 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 //import formatMoney from "../../functions/formatMoney";
 
-const ShowPaymentInfo = ({ order }) => {
+const ShowPaymentInfo = ({ order, showStatus = true }) => {
   return (
     <div className="container pb-3">
       <div className="col">
         <div className="row">
-          <div className="col text-left">
+          <div className="col-md-4 text-left">
             <p>
               <span>
                 {" "}
@@ -22,15 +22,17 @@ const ShowPaymentInfo = ({ order }) => {
               </span>
               {"  "}
             </p>
-            <p>
-              <span className="badge bg-primary text-white btn btn-sm btn-block">
-                <span className="font-weight-bold">Order Status:</span>{" "}
-                {order.orderStatus}
-              </span>
-              {"  "}
-            </p>
+            {showStatus && (
+              <p>
+                <span className="badge bg-primary text-white btn btn-md btn-block">
+                  <span className="font-weight-bold">Order Status:</span>{" "}
+                  {order.orderStatus}
+                </span>
+                {"  "}
+              </p>
+            )}
           </div>
-          <div className="col text-right">
+          <div className="col-md-8 text-right">
             <p>
               <span>
                 <span className="font-weight-bold">Payment Method:</span>{" "}
@@ -65,6 +67,7 @@ const ShowPaymentInfo = ({ order }) => {
 
 ShowPaymentInfo.propTypes = {
   order: PropTypes.any,
+  showStatus: PropTypes.bool,
 };
 
 export default ShowPaymentInfo;

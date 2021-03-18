@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Card, Tabs, Tooltip } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import {
   HeartOutlined,
   ShoppingCartOutlined,
@@ -14,8 +14,10 @@ import PropTypes from "prop-types";
 import StarRating from "react-star-ratings";
 import RatingModal from "../modal/RatingModal";
 import { showAverageRating } from "../../functions/rating";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
+import { addToUserWishlist } from "../../functions/user";
+import { toast } from "react-toastify";
 
 //THIS IS NOT A PARENT COMPONENT, Used in Product page
 
@@ -24,12 +26,13 @@ const { TabPane } = Tabs;
 
 //this is child component of Product, so Product will send starRating onStarClick function as props
 const SingleProduct = ({ product, onStarClick, star }) => {
+  const history = useHistory();
   const { title, description, images, ingredient, _id } = product;
 
   const [tooltip, setTooltip] = useState("Click to Add Item to Cart");
-
+  const [tooltipWish] = useState("Save to Wishlist for Another Time?");
   //redux state dispatch
-  //const { user, cart } = useSelector((state) => ({ ...state }));
+  const { user } = useSelector((state) => ({ ...state }));
   const dispatch = useDispatch();
 
   const handleAddToCart = () => {
@@ -69,6 +72,22 @@ const SingleProduct = ({ product, onStarClick, star }) => {
         payload: true,
       });
     }
+  };
+
+  const handleAddToWishlist = (e) => {
+    e.preventDefault();
+    //we are in a single product view so have product as props
+    addToUserWishlist(_id, user.token).then((res) => {
+      if (res.data.ok) {
+        console.log(`${product._id} ${product.title} added to wishlist`);
+        toast.success("Added to wishlist");
+        history.push("/user/wishlist");
+      }
+    });
+    // .catch((err) => {
+    //   console.log(err);
+    //   toast.error("Error adding to wishlist:", err.message);
+    // });
   };
 
   return (
@@ -142,22 +161,24 @@ const SingleProduct = ({ product, onStarClick, star }) => {
               <a onClick={handleAddToCart} disabled={product.quantity < 1}>
                 {product.quantity < 1 ? (
                   <>
-                    <InfoCircleOutlined key={2} className="text-danger" />{" "}
-                    <br /> Out of Stock
+                    <InfoCircleOutlined className="text-danger" /> <br /> Out of
+                    Stock
                   </>
                 ) : (
                   <>
-                    <ShoppingCartOutlined key={2} className="text-success" />{" "}
-                    <br /> Add To Cart
+                    <ShoppingCartOutlined className="text-success" /> <br /> Add
+                    To Cart
                   </>
                 )}
               </a>
               ,
             </Tooltip>,
-            <Link key={2} to="/">
-              <HeartOutlined className="text-info" /> <br />
-              Add to Wishlist
-            </Link>,
+            <Tooltip key={2} title={tooltipWish}>
+              <a onClick={handleAddToWishlist}>
+                <HeartOutlined className="text-info" /> <br />
+                Add to Wishlist
+              </a>
+            </Tooltip>,
             <RatingModal key={3}>
               <StarRating
                 name={_id}

@@ -41,14 +41,23 @@ const Invoice = ({ order }) => {
         </Table>
         <Text style={styles.text}>
           <Text>
-            Date:{" "}
+            Order Date:{"        "}
             {new Date(order.paymentIntent.created * 1000).toLocaleString()}
           </Text>
-          <Text>Order ID: {order.paymentIntent.id}</Text>
-          <Text>Order Status: {order.orderStatus}</Text>
+          {"\n"}
           <Text>
-            Total Paid: ${formatMoney(order.paymentIntent.amount / 100)}
+            Order ID:{"          "} {order.paymentIntent.id}
           </Text>
+          {"\n"}
+          <Text>
+            Order Status:{"     "} {order.orderStatus}
+          </Text>
+          {"\n"}
+          <Text>
+            Total Paid:{"         "} $
+            {formatMoney(order.paymentIntent.amount / 100)}
+          </Text>
+          {"\n"}
         </Text>
         <Text style={styles.footer}>
           ~ Thank you for Shopping with Consider Herbs Market ~

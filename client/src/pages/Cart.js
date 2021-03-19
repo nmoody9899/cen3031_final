@@ -1,8 +1,5 @@
 import React from "react";
-import {
-  useSelector,
-  // useDispatch
-} from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import formatMoney from "../functions/formatMoney";
 import ProductCardInCheckout from "../components/cards/ProductCardInCheckout";
@@ -13,7 +10,7 @@ import { userCart } from "../functions/user";
 const Cart = ({ history }) => {
   //access redux
   const { user, cart } = useSelector((state) => ({ ...state }));
-  //const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const calculateTotal = () => {
     return cart.reduce((currVal, nextVal) => {
@@ -27,6 +24,27 @@ const Cart = ({ history }) => {
       .then((res) => {
         console.log("CART POST RESPONSE", res);
         if (res.data.ok) {
+          //if response is good then redirect user to checkout page
+          history.push("/checkout");
+        }
+      })
+      .catch((err) => console.log("CART SAVE ERR", err));
+    // console.log("cart from redux checkout", JSON.stringify(cart, null, 4));
+    //alert("saveOrderToDb");
+    //redirect to checkout page
+  };
+
+  const saveCashOrderToDb = () => {
+    console.log("Saving CASH order to db", JSON.stringify(cart, null, 4));
+    userCart(cart, user.token)
+      .then((res) => {
+        console.log("CASH -> CART POST RESPONSE", res);
+        if (res.data.ok) {
+          //set state in redux for later use on checkout (useSelector to grab this value and proceed accordingly)
+          dispatch({
+            type: "CASH_ON_DELIVERY",
+            payload: true,
+          });
           //if response is good then redirect user to checkout page
           history.push("/checkout");
         }
@@ -89,12 +107,21 @@ const Cart = ({ history }) => {
           <hr />
           {user
             ? cart.length > 0 && (
-                <button
-                  onClick={saveOrderToDb} //need to send cart order to database with backend information because users can manipulate local storage
-                  className="btn btn-sm btn-primary  mt-2"
-                >
-                  Proceed to Checkout
-                </button>
+                <>
+                  <button
+                    onClick={saveOrderToDb} //need to send cart order to database with backend information because users can manipulate local storage
+                    className="btn btn-sm btn-primary mt-2"
+                  >
+                    Proceed to Checkout
+                  </button>
+                  <br />
+                  <button
+                    onClick={saveCashOrderToDb} //need to send cart order to database with backend information because users can manipulate local storage
+                    className="btn btn-sm btn-warning mt-2"
+                  >
+                    Pay Cash on Delivery
+                  </button>
+                </>
               )
             : cart.length > 0 && (
                 <button className="btn btn-sm btn-primary  mt-2">

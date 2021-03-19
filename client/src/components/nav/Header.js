@@ -101,6 +101,12 @@ const Header = () => {
               </Item>
             )}
 
+            {user && user.role === "admin" && (
+              <Item>
+                <Link to="/user/history">My History</Link>
+              </Item>
+            )}
+
             <Item icon={<LogoutOutlined />} onClick={logout}>
               Logout
             </Item>

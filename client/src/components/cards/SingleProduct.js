@@ -77,9 +77,8 @@ const SingleProduct = ({ product, onStarClick, star }) => {
   const handleAddToWishlist = (e) => {
     e.preventDefault();
     //we are in a single product view so have product as props
-    addToUserWishlist(_id, user.token).then((res) => {
+    addToUserWishlist(product._id, user.token).then((res) => {
       if (res.data.ok) {
-        console.log(`${product._id} ${product.title} added to wishlist`);
         toast.success("Added to wishlist");
         history.push("/user/wishlist");
       }

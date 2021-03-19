@@ -20,6 +20,7 @@ const orderSchema = new mongoose.Schema(
       default: "not processed",
       enum: [
         "not processed",
+        "cash on delivery",
         "processing",
         "dispatched",
         "cancelled",

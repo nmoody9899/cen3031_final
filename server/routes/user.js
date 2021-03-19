@@ -16,6 +16,7 @@ const {
   addToWishlist,
   wishlist,
   removeFromWishlist,
+  createCashOrder,
 } = require("../controllers/user");
 
 //we have user in client, now we need to check on back
@@ -38,6 +39,7 @@ router.post("/user/address", authCheck, saveAddress);
 router.post("/user/cart/coupon", authCheck, applyCouponToUserCart);
 
 router.post("/user/order", authCheck, createOrder);
+router.post("/user/cash-order", authCheck, createCashOrder);
 
 router.get("/user/orders", authCheck, getUserOrders);
 
@@ -45,6 +47,8 @@ router.get("/user/orders", authCheck, getUserOrders);
 router.post("/user/wishlist", authCheck, addToWishlist);
 router.get("/user/wishlist", authCheck, wishlist);
 router.put("/user/wishlist/:productId", authCheck, removeFromWishlist);
+
+//create cash order
 
 //need to export from here to use in server.js
 module.exports = router;

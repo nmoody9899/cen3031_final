@@ -5,6 +5,7 @@ import {
   emptyUserCart,
   saveUserAddress,
   applyCoupon,
+  createCashOrderForUser,
 } from "../functions/user";
 import formatMoney from "../functions/formatMoney";
 import { toast } from "react-toastify";
@@ -26,12 +27,14 @@ const Checkout = ({ history }) => {
   const [total, setTotal] = useState(0);
   const [address, setAddress] = useState(initialAddressState);
   const [addressSaved, setAddressSaved] = useState(false);
-  const [coupon, setCoupon] = useState("");
+  const [couponTitle, setCouponTitle] = useState("");
   const [totalAfterDiscount, setTotalAfterDiscount] = useState(0);
   const [discountErr, setDiscountErr] = useState("");
 
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => ({ ...state }));
+  const { user, cashOnDelivery, coupon } = useSelector((state) => ({
+    ...state,
+  }));
 
   useEffect(() => {
     getUserCart(user.token).then((res) => {
@@ -64,13 +67,23 @@ const Checkout = ({ history }) => {
       payload: [],
     });
 
+    dispatch({
+      type: "COUPON_APPLIED",
+      payload: false,
+    });
+
+    dispatch({
+      type: "CASH_ON_DELIVERY",
+      payload: false,
+    });
+
     //remove from backend
     emptyUserCart(user.token).then((res) => {
       console.log(res);
       setProducts([]); //clear out products in state
       setTotal(0);
       setTotalAfterDiscount(0);
-      setCoupon("");
+      setCouponTitle("");
       toast.success("Cart has been emptied. Continue shopping.");
     });
   };
@@ -96,7 +109,7 @@ const Checkout = ({ history }) => {
 
   const handleCouponApply = () => {
     //console.log("COUPON TO CHECK AND APPLY", coupon);
-    applyCoupon(user.token, coupon).then((res) => {
+    applyCoupon(user.token, couponTitle).then((res) => {
       console.log("RES ON COUPON APPLIED", res.data);
       if (res.data) {
         setTotalAfterDiscount(res.data);
@@ -128,9 +141,9 @@ const Checkout = ({ history }) => {
         <input
           className="form-control"
           type="text"
-          value={coupon}
+          value={couponTitle}
           onChange={(e) => {
-            setCoupon(e.target.value);
+            setCouponTitle(e.target.value);
             setDiscountErr("");
           }}
         />
@@ -143,6 +156,50 @@ const Checkout = ({ history }) => {
         </div>
       </>
     );
+  };
+
+  const createCashOrder = () => {
+    // need to send user token only to fetch cart and create new order
+    //we will create payment intent in back end for this
+    createCashOrderForUser(user.token, cashOnDelivery, coupon).then((res) => {
+      console.log("USER CASH ORDER CREATED RES", res);
+      //empty cart from redux, local storage, database, reset coupon, reset cashOnDelivery
+      if (res.data.ok) {
+        //empty local storage
+        if (typeof window !== "undefined") {
+          localStorage.removeItem("cart");
+        }
+        //empty cart in redux
+        dispatch({
+          type: "ADD_TO_CART",
+          payload: [],
+        });
+        //reset coupon
+        dispatch({
+          type: "COUPON_APPLIED",
+          payload: false,
+        });
+        //empty redux cash on delivery
+        dispatch({
+          type: "CASH_ON_DELIVERY",
+          payload: false,
+        });
+        //empty cart backend
+        emptyUserCart(user.token).then((res) => {
+          console.log(res);
+          setProducts([]); //clear out products in state
+          setTotal(0);
+          setTotalAfterDiscount(0);
+          setCouponTitle("");
+          toast.success("Cart has been emptied. Continue shopping.");
+        });
+
+        //redirect
+        setTimeout(() => {
+          history.push("/user/history");
+        }, 2000);
+      }
+    });
   };
 
   return (
@@ -179,13 +236,23 @@ const Checkout = ({ history }) => {
         )}
         <div className="row">
           <div className="col-md-6">
-            <button
-              disabled={!addressSaved || !products.length}
-              className="btn btn-primary mt-2"
-              onClick={() => history.push("/payment")}
-            >
-              Place Order
-            </button>
+            {cashOnDelivery ? (
+              <button
+                disabled={!addressSaved || !products.length}
+                className="btn btn-primary mt-2"
+                onClick={() => createCashOrder()}
+              >
+                Place Order
+              </button>
+            ) : (
+              <button
+                disabled={!addressSaved || !products.length}
+                className="btn btn-primary mt-2"
+                onClick={() => history.push("/payment")}
+              >
+                Place Order
+              </button>
+            )}
           </div>
           <div className="col-md-6">
             <button

@@ -16,9 +16,7 @@ const ShowPaymentInfo = ({ order, showStatus = true }) => {
               </span>{" "}
               <span>
                 <span className="font-weight-bold">Ordered On:</span>{" "}
-                {new Date(
-                  order.paymentIntent.created * 1000
-                ).toLocaleDateString()}
+                {new Date(order.paymentIntent.created * 1000).toLocaleString()}
               </span>
               {"  "}
             </p>

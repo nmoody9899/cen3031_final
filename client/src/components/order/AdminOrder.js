@@ -69,6 +69,9 @@ const AdminOrder = ({ orders, handleStatusChange }) => {
                   <option value="not processed" className="text-capitalize">
                     not processed
                   </option>
+                  <option value="cash on delivery" className="text-capitalize">
+                    cash on delivery
+                  </option>
                   <option value="processing" className="text-capitalize">
                     processing
                   </option>

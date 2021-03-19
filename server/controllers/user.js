@@ -3,6 +3,7 @@ const Product = require("../models/product");
 const Cart = require("../models/cart");
 const Coupon = require("../models/coupon");
 const Order = require("../models/order");
+const uniqid = require("uniqid");
 
 exports.userCart = async (req, res) => {
   //cart will come in request body
@@ -174,6 +175,63 @@ exports.createOrder = async (req, res) => {
   );
 
   console.log("NEW ORDER SAVED", newOrder);
+
+  res.json({ ok: true });
+};
+
+exports.createCashOrder = async (req, res) => {
+  const { cashOnDelivery, couponApplied } = req.body;
+  //create a payment intent otherwise user/admin will have errors in their dashboards
+  if (!cashOnDelivery) {
+    return res.status(400).send("Create Cash Order Failed!");
+  }
+  //if COD is true then create order with status Cash On Delivery
+  const user = await User.findOne({ email: req.user.email }).exec(); //need user for cart and token
+  //save cart items as order and then empty cart
+  const cart = await Cart.findOne({ orderedBy: user._id }).exec();
+
+  let finalAmount = 0;
+
+  if (couponApplied && cart.totalAfterDiscount > 0) {
+    finalAmount = cart.totalAfterDiscount;
+  } else {
+    finalAmount = cartTotal;
+  }
+
+  let newOrder = await new Order({
+    products: cart.products,
+    paymentIntent: {
+      id: uniqid(),
+      amount: finalAmount * 100, //need to fix this in case coupon was applied
+      currency: "usd",
+      status: "Cash On Delivery",
+      created: Math.ceil(Date.now() / 1000),
+      payment_method_types: ["cash"],
+    },
+    orderStatus: "cash on delivery",
+    orderedBy: user._id,
+  }).save();
+
+  //order saved so now decrement quantity available, increment number of item sold (these are both available in product model) and come from cart count
+  let bulkOption = cart.products.map((item) => {
+    return {
+      updateOne: {
+        filter: { _id: item.product._id }, //IMPORTANT! item.product
+        update: { $inc: { quantity: -item.count, sold: +item.count } },
+      },
+    };
+  });
+
+  //Product.bulkWrite({})
+  //now apply bulk operation to products
+  let updated = await Product.bulkWrite(bulkOption, {});
+
+  console.log(
+    "PRODUCTS QUANTITY DECREMENTED AND SOLD INCREMENTED------>",
+    updated
+  );
+
+  console.log("NEW CASH ORDER SAVED", newOrder);
 
   res.json({ ok: true });
 };

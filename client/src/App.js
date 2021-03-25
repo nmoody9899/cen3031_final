@@ -54,6 +54,8 @@ import Payment from "./pages/Payment";
 
 //for navigation from ant Header
 import Header from "./components/nav/Header";
+import Footer from "./components/nav/Footer";
+
 
 import { auth } from "./firebase";
 import { useDispatch } from "react-redux";
@@ -203,6 +205,7 @@ const App = () => {
         />
         <UserRoute exact path="/payment" component={Payment} />
       </Switch>
+      <Footer />
     </React.Fragment>
   );
 };

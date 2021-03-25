@@ -7,3 +7,50 @@
 .pointer {
     cursor: pointer
 }
+
+.page-container {
+    position: relative;
+    min-height: 90vh;
+}
+/* {.content-wrap
+   /* padding-bottom: 2.5rem;*/
+
+
+
+
+#twitter-icon-container{
+    font-size: 30px;
+    margin-left: -.2rem;
+}
+#email-icon-container{
+    font-size: 28px;
+    vertical-align: middle;
+    align-items: center;
+}
+.email-icon{
+    vertical-align: middle;
+    font-size:14px;
+   
+    vertical-align: 8px;
+}
+
+.footer-divide{
+    color: #228B22;
+    background-color: #228B22;
+    height: 22px;
+   margin-bottom: -10px;
+   margin-top: 0rem;
+        
+}
+
+.last-divider{
+    
+    width: 100%;
+    margin-top: -1rem;
+   margin-bottom: .5rem;
+   
+}
+.Footer-Bottom{
+    -ms-flex-align: center;
+    margin-left: 9.5rem;
+}

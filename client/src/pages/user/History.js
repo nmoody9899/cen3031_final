@@ -118,18 +118,25 @@ const History = () => {
     ));
 
   return (
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-md-2">
-          <UserNav />
-        </div>
-        <div className="col text-center">
-          {orders.length > 0 ? (
-            <h4>User purchase orders</h4>
-          ) : (
-            <h4>Make your first purchase today!</h4>
-          )}
-          {showOrders()}
+    <div className="page-container">
+
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-md-2">
+            <UserNav />
+          </div>
+          <div className="col text-center">
+            {orders.length > 0 ? (
+              <h4>User purchase orders</h4>
+            ) : (
+              <h4>Make your first purchase today!</h4>
+            )}
+            {showOrders()}
+            <body>
+              <div id="content-wrap">
+              </div>
+            </body>
+          </div>
         </div>
       </div>
     </div>

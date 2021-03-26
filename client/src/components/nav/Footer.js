@@ -44,12 +44,16 @@ const Footer = () => (
             {/* Footer Bottom*/}
         </div>
         <hr className="last-divider"></hr>
-        <div className="Footer-Bottom">
-            <p className="text-xxs-center">
-                &copy;{new Date().getFullYear()} Consider Herbs - All Rights Reserved
+        <div className="container">
+            <div className="row py-4 d-flex align-items-center">
+                <div className="Footer-Bottom">
+                    <p className="text-xxs-center">
+                        &copy;{new Date().getFullYear()} Consider Herbs - All Rights Reserved
                 </p>
+                </div>
+            </div>
         </div>
-    </div >
+    </div>
 
 
 

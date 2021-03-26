@@ -60,6 +60,9 @@ import { useDispatch } from "react-redux";
 
 import { currentUser } from "./functions/auth";
 
+//Information
+import Info from "./pages/info";
+
 const App = () => {
   const dispatch = useDispatch();
 
@@ -202,6 +205,7 @@ const App = () => {
           component={CreateCouponPage}
         />
         <UserRoute exact path="/payment" component={Payment} />
+        <Route exact path="/information" component={Info} />
       </Switch>
     </React.Fragment>
   );

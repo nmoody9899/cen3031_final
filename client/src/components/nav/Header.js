@@ -11,6 +11,7 @@ import {
   LogoutOutlined,
   ShoppingOutlined,
   ShoppingCartOutlined,
+  InfoCircleOutlined
 } from "@ant-design/icons";
 
 import firebase from "firebase"; //required to implement LOGOUT
@@ -63,10 +64,13 @@ const Header = () => {
             count={cart.length}
             offset={[9, 0]}
             title={`${cart.length} Items in Cart`}
-          >
-            Cart
+          >Cart
           </Badge>
         </Link>
+      </Item>
+
+      <Item key="information" icon={<InfoCircleOutlined />}>
+        <Link to="/information">Information</Link>
       </Item>
 
       {!user && (

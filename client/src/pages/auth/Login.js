@@ -208,13 +208,14 @@ const Login = ({ history }) => {
             <Link to="/forgot/password" className="float-right text-danger">
               Forgot Password
           </Link>
-            <body>
-              <div id="content-wrap">
-              </div>
-            </body>
+
           </div>
         </div>
       </div>
+      <body>
+        <div id="content-wrap">
+        </div>
+      </body>
     </div>
   );
 };

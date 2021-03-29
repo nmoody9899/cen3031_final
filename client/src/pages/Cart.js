@@ -138,13 +138,15 @@ const Cart = ({ history }) => {
                   </Link>
                 </button>
               )}
-            <body>
-              <div id="content-wrap">
-              </div>
-            </body>
+
+
           </div>
         </div>
       </div>
+      <body>
+        <div id="content-wrap">
+        </div>
+      </body>
     </div>
   );
 };

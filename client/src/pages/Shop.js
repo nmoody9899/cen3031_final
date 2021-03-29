@@ -321,133 +321,140 @@ const Shop = () => {
 
   //need sidebar
   return (
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-md-3 pt-2">
-          <h4>Search/Filter Menu</h4>
-          <hr />
-          {/* {JSON.stringify(defaultCatIds)} */}
-          <hr />
-          <Menu defaultOpenKeys={["1", "2", "7"]} mode="inline">
-            {/* {Price} */}
-            <SubMenu
-              key="1"
-              title={
-                <span className="h6">
-                  <DollarOutlined />
+    <div className="page-container">
+
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-md-3 pt-2">
+            <h4>Search/Filter Menu</h4>
+            <hr />
+            {/* {JSON.stringify(defaultCatIds)} */}
+            <hr />
+            <Menu defaultOpenKeys={["1", "2", "7"]} mode="inline">
+              {/* {Price} */}
+              <SubMenu
+                key="1"
+                title={
+                  <span className="h6">
+                    <DollarOutlined />
                   Price
                 </span>
-              }
-            >
-              <div>
-                <Slider
-                  className="ml-4 mr-4"
-                  tipFormatter={(v) => `$${v}`}
-                  range
-                  value={price}
-                  onChange={handleSlider}
-                  max="500"
-                />
-              </div>
-            </SubMenu>
-            {/* {Brands} */}
-            {/* {JSON.stringify(brandIds)} */}
-            <SubMenu
-              key="2"
-              title={
-                <span className="h6">
-                  <DownSquareOutlined />
+                }
+              >
+                <div>
+                  <Slider
+                    className="ml-4 mr-4"
+                    tipFormatter={(v) => `$${v}`}
+                    range
+                    value={price}
+                    onChange={handleSlider}
+                    max="500"
+                  />
+                </div>
+              </SubMenu>
+              {/* {Brands} */}
+              {/* {JSON.stringify(brandIds)} */}
+              <SubMenu
+                key="2"
+                title={
+                  <span className="h6">
+                    <DownSquareOutlined />
                   Brands
                 </span>
-              }
-            >
-              <div style={{ marginTop: "-10px" }}>{showBrands()}</div>
-            </SubMenu>
-            {/* {Categories} */}
-            {/* {JSON.stringify(categoryIds)} */}
-            <SubMenu
-              key="3"
-              title={
-                <span className="h6">
-                  <DownSquareOutlined />
+                }
+              >
+                <div style={{ marginTop: "-10px" }}>{showBrands()}</div>
+              </SubMenu>
+              {/* {Categories} */}
+              {/* {JSON.stringify(categoryIds)} */}
+              <SubMenu
+                key="3"
+                title={
+                  <span className="h6">
+                    <DownSquareOutlined />
                   Categories
                 </span>
-              }
-            >
-              <div style={{ marginTop: "-10px" }}>{showCategories()}</div>
-            </SubMenu>
-            {/* {SubCategories} */}
-            {/* {JSON.stringify(subcatIds)} */}
-            <SubMenu
-              key="4"
-              title={
-                <span className="h6">
-                  <DownSquareOutlined />
+                }
+              >
+                <div style={{ marginTop: "-10px" }}>{showCategories()}</div>
+              </SubMenu>
+              {/* {SubCategories} */}
+              {/* {JSON.stringify(subcatIds)} */}
+              <SubMenu
+                key="4"
+                title={
+                  <span className="h6">
+                    <DownSquareOutlined />
                   Sub-Categories
                 </span>
-              }
-            >
-              <div style={{ marginTop: "-10px" }}>{showSubCategories()}</div>
-            </SubMenu>
-            {/* {FormOrTypes} */}
-            {/* {JSON.stringify(formtypeIds)} */}
-            <SubMenu
-              key="5"
-              title={
-                <span className="h6">
-                  <DownSquareOutlined />
+                }
+              >
+                <div style={{ marginTop: "-10px" }}>{showSubCategories()}</div>
+              </SubMenu>
+              {/* {FormOrTypes} */}
+              {/* {JSON.stringify(formtypeIds)} */}
+              <SubMenu
+                key="5"
+                title={
+                  <span className="h6">
+                    <DownSquareOutlined />
                   Form/Type
                 </span>
-              }
-            >
-              <div style={{ marginTop: "-10px" }}>{showFormtypes()}</div>
-            </SubMenu>
-            {/* {Ingredients} */}
-            {/* {JSON.stringify(ingredientIds)} */}
-            <SubMenu
-              key="6"
-              title={
-                <span className="h6">
-                  <DownSquareOutlined />
+                }
+              >
+                <div style={{ marginTop: "-10px" }}>{showFormtypes()}</div>
+              </SubMenu>
+              {/* {Ingredients} */}
+              {/* {JSON.stringify(ingredientIds)} */}
+              <SubMenu
+                key="6"
+                title={
+                  <span className="h6">
+                    <DownSquareOutlined />
                   Ingredients
                 </span>
-              }
-            >
-              <div style={{ marginTop: "-10px" }}>{showIngredients()}</div>
-            </SubMenu>
-            {/* {Ingredients} */}
-            {/* {JSON.stringify(ship)} */}
-            <SubMenu
-              key="7"
-              title={
-                <span className="h6">
-                  <RadarChartOutlined />
+                }
+              >
+                <div style={{ marginTop: "-10px" }}>{showIngredients()}</div>
+              </SubMenu>
+              {/* {Ingredients} */}
+              {/* {JSON.stringify(ship)} */}
+              <SubMenu
+                key="7"
+                title={
+                  <span className="h6">
+                    <RadarChartOutlined />
                   Shipping
                 </span>
-              }
-            >
-              <div style={{ marginTop: "-10px" }}>{showShipping()}</div>
-            </SubMenu>
-          </Menu>
-        </div>
-
-        {/**Main Window Below */}
-        <div className="col-md-9 pt-2">
-          {loading ? (
-            <h4 className="text-danger">Loading...</h4>
-          ) : (
-            <h4 className="text-primary">Products</h4>
-          )}
-          {products.length < 1 && <p>No Products Found</p>}
-
-          <div className="row pb-5">
-            {products &&
-              products.map((p) => (
-                <div key={p._id} className="col-md-4 mt-3 mb-3">
-                  <ProductCard product={p} />
-                </div>
-              ))}
+                }
+              >
+                <div style={{ marginTop: "-10px" }}>{showShipping()}</div>
+              </SubMenu>
+            </Menu>
           </div>
+
+          {/**Main Window Below */}
+          <div className="col-md-9 pt-2">
+            {loading ? (
+              <h4 className="text-danger">Loading...</h4>
+            ) : (
+              <h4 className="text-primary">Products</h4>
+            )}
+            {products.length < 1 && <p>No Products Found</p>}
+
+            <div className="row pb-5">
+              {products &&
+                products.map((p) => (
+                  <div key={p._id} className="col-md-4 mt-3 mb-3">
+                    <ProductCard product={p} />
+                  </div>
+                ))}
+            </div>
+          </div>
+          <body>
+            <div id="content-wrap">
+            </div>
+          </body>
         </div>
       </div>
     </div>

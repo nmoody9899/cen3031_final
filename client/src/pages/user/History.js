@@ -132,13 +132,14 @@ const History = () => {
               <h4>Make your first purchase today!</h4>
             )}
             {showOrders()}
-            <body>
-              <div id="content-wrap">
-              </div>
-            </body>
+
           </div>
         </div>
       </div>
+      <body>
+        <div id="content-wrap">
+        </div>
+      </body>
     </div>
   );
 };

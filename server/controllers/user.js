@@ -195,7 +195,7 @@ exports.createCashOrder = async (req, res) => {
   if (couponApplied && cart.totalAfterDiscount > 0) {
     finalAmount = cart.totalAfterDiscount;
   } else {
-    finalAmount = cartTotal;
+    finalAmount = cart.cartTotal;
   }
 
   let newOrder = await new Order({

@@ -46,37 +46,44 @@ const ForgotPassword = ({ history }) => {
   };
 
   return (
-    <div className="container col-md-6 offset-md-3 p-5">
-      {loading ? (
-        <h4 className="text-danger">Loading...</h4>
-      ) : (
-        <h4>Forgot Password</h4>
-      )}
+    <div className="page-container">
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="email"
-          className="form-control"
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-          placeholder="Enter email"
-          autoFocus
-        />
-        <br />
+      <div className="container col-md-6 offset-md-3 p-5">
+        {loading ? (
+          <h4 className="text-danger">Loading...</h4>
+        ) : (
+          <h4>Forgot Password</h4>
+        )}
 
-        <Button
-          onClick={handleSubmit}
-          type="primary"
-          className="mb-3"
-          shape="round"
-          block
-          icon={<MailOutlined />}
-          size="large"
-          disabled={!email ? true : false}
-        >
-          Email Reset Link
+        <form onSubmit={handleSubmit}>
+          <input
+            type="email"
+            className="form-control"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            placeholder="Enter email"
+            autoFocus
+          />
+          <br />
+
+          <Button
+            onClick={handleSubmit}
+            type="primary"
+            className="mb-3"
+            shape="round"
+            block
+            icon={<MailOutlined />}
+            size="large"
+            disabled={!email ? true : false}
+          >
+            Email Reset Link
         </Button>
-      </form>
+        </form>
+        <body>
+          <div id="content-wrap">
+          </div>
+        </body>
+      </div>
     </div>
   );
 };

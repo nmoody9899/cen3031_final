@@ -104,11 +104,17 @@ const RegisterComplete = ({ history }) => {
   };
 
   return (
-    <div className="container p-5">
-      <div className="row">
-        <div className="col-md-6 offset-md-3">
-          <h4>Registration Complete</h4>
-          {completeRegistrationForm()}
+    <div className="page-container">
+      <div className="container p-5">
+        <div className="row">
+          <div className="col-md-6 offset-md-3">
+            <h4>Registration Complete</h4>
+            {completeRegistrationForm()}
+            <body>
+              <div id="content-wrap">
+              </div>
+            </body>
+          </div>
         </div>
       </div>
     </div>

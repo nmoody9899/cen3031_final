@@ -33,26 +33,33 @@ const Wishlist = () => {
   };
 
   return (
-    <div className="container-fluid">
-      {/* {JSON.stringify(wishlist, null, 4)} */}
-      <div className="row">
-        <div className="col-md-2">
-          <UserNav />
+    <div className="page-container">
+
+      <div className="container-fluid">
+        {/* {JSON.stringify(wishlist, null, 4)} */}
+        <div className="row">
+          <div className="col-md-2">
+            <UserNav />
+          </div>
+          <div className="col">
+            <h4>Wishlist</h4>
+            {wishlist.map((prod) => (
+              <div key={prod._id} className="alert alert-secondary">
+                <Link to={`/product/${prod.slug}`}>{prod.title}</Link>
+                <span
+                  onClick={() => handleRemoveFromWishlist(prod._id)}
+                  className="btn btn-sm float-right"
+                >
+                  <DeleteOutlined className="text-danger" />
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="col">
-          <h4>Wishlist</h4>
-          {wishlist.map((prod) => (
-            <div key={prod._id} className="alert alert-secondary">
-              <Link to={`/product/${prod.slug}`}>{prod.title}</Link>
-              <span
-                onClick={() => handleRemoveFromWishlist(prod._id)}
-                className="btn btn-sm float-right"
-              >
-                <DeleteOutlined className="text-danger" />
-              </span>
-            </div>
-          ))}
-        </div>
+        <body>
+          <div id="content-wrap">
+          </div>
+        </body>
       </div>
     </div>
   );

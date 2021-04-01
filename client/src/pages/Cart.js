@@ -75,38 +75,39 @@ const Cart = ({ history }) => {
   );
 
   return (
-    <div className="container-fluid pt-2">
-      <div className="row">
-        <div className="col-md-8">
-          <h4>
-            Cart | {cart.length > 0 ? `${cart.length} Items` : `Nothing Yet!!`}
-          </h4>
-          {!cart.length ? (
-            <p>
-              Looks like your cart is empty.{" "}
-              <Link to="/shop">Continue Shopping</Link>
-            </p>
-          ) : (
-            showCartItems()
-          )}
-        </div>
-        <div className="col-md-4">
-          <h4>Order Summary</h4>
-          <hr />
-          <p>Products</p>
-          <hr />
-          {cart.map((c, i) => (
-            <div key={i}>
+    <div className="page-container">
+      <div className="container-fluid pt-2">
+        <div className="row">
+          <div className="col-md-8">
+            <h4>
+              Cart | {cart.length > 0 ? `${cart.length} Items` : `Nothing Yet!!`}
+            </h4>
+            {!cart.length ? (
               <p>
-                {c.title} x {c.count} = ${formatMoney(c.count * c.price)}
+                Looks like your cart is empty.{" "}
+                <Link to="/shop">Continue Shopping</Link>
               </p>
-            </div>
-          ))}
-          <hr />
+            ) : (
+              showCartItems()
+            )}
+          </div>
+          <div className="col-md-4">
+            <h4>Order Summary</h4>
+            <hr />
+            <p>Products</p>
+            <hr />
+            {cart.map((c, i) => (
+              <div key={i}>
+                <p>
+                  {c.title} x {c.count} = ${formatMoney(c.count * c.price)}
+                </p>
+              </div>
+            ))}
+            <hr />
           Total: <b>${formatMoney(calculateTotal())}</b>
-          <hr />
-          {user
-            ? cart.length > 0 && (
+            <hr />
+            {user
+              ? cart.length > 0 && (
                 <>
                   <button
                     onClick={saveOrderToDb} //need to send cart order to database with backend information because users can manipulate local storage
@@ -123,7 +124,7 @@ const Cart = ({ history }) => {
                   </button>
                 </>
               )
-            : cart.length > 0 && (
+              : cart.length > 0 && (
                 <button className="btn btn-sm btn-primary  mt-2">
                   <Link
                     to={{
@@ -137,8 +138,15 @@ const Cart = ({ history }) => {
                   </Link>
                 </button>
               )}
+
+
+          </div>
         </div>
       </div>
+      <body>
+        <div id="content-wrap">
+        </div>
+      </body>
     </div>
   );
 };

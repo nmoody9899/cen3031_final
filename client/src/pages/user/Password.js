@@ -43,17 +43,24 @@ const Password = () => {
     );
 
     return (
-        <div className="container-fluid">
-            <div className="row">
-                <div className="col-md-2">
-                    <UserNav />
-                </div>
-                <div className="col">
-                    {loading ? (<h4 className="text-danger">Loading...</h4>)
-                        : (
-                            <h4>Password Update</h4>
-                        )}
-                    {passwordUpdateForm()}
+        <div className="page-container">
+
+            <div className="container-fluid">
+                <div className="row">
+                    <div className="col-md-2">
+                        <UserNav />
+                    </div>
+                    <div className="col">
+                        {loading ? (<h4 className="text-danger">Loading...</h4>)
+                            : (
+                                <h4>Password Update</h4>
+                            )}
+                        {passwordUpdateForm()}
+                    </div>
+                    <body>
+                        <div id="content-wrap">
+                        </div>
+                    </body>
                 </div>
             </div>
         </div>

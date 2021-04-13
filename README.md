@@ -25,3 +25,52 @@ The information page will have integration through shared articles and social me
 User testimonials will be shared to this page, whether they are verified customers or valued visitors of the site's various resources.
 
 ADDED: client/server primitives with basic user authentication and token passing between front and back-end (to run locally you'll have to remote lock files and npm install in directory)
+
+
+
+--------------------------PROJECT ACCOUNT INFORMATION BELOW--------------------------------
+User Accounts for ecommerce FireBase:
+application.devadm@gmail.com RS2pgU7J8U3QYFH
+application.devuser1@gmail.com RS2pgU7J8U3QYFJ
+
+User Accounts for MongoDB Atlas:
+application.devmongodbadm@gmail.com RS2pgU7J8U3QYFH
+application.devmongodbuser@gmail.com RS2pgU7J8U3
+application.devmongodbowner@gmail.com RS2pgU7J8U3QYFI (used to register for MongoDB Atlas free)
+
+MongoDB Users:
+Admin: AppDevMongoDBAdm RS2pgU7J8U3QYFH (use this to login and administer database at mongo atlas site)
+
+password: RS2pgU7J8U3QYFH
+dbname: AppDevDbase
+
+Connection Info:
+mongodb+srv://AppDevMongoDBAdm:<password>@nodeapi.crakh.mongodb.net/<dbname>?retryWrites=true&w=majority
+
+
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://AppDevMongoDBAdm:<password>@nodeapi.crakh.mongodb.net/<dbname>?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true });
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  client.close();
+});
+
+User: AppDevMongoDBUser RS2pgU7J8U3QYFJ
+
+Database(collection): AppDevDbase.NodeAPI
+
+Cloudinary for Images (need URLs in database):
+application.devadm@gmail.com
+RS2pgU7J8U3QYFH!!
+Assigned Cloud Name: dqdpito3m
+
+STRIPE:
+application.devadm@gmail.com RS2pgU7J8U3QYFH
+
+SQUARE:
+application.devadm@gmail.com RS2pgU7J8U3QYFH
+application: ecommerce_ch 
+
+GOOGLE CLOUD PLATFORM MAIL

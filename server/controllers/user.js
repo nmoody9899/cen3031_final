@@ -35,9 +35,7 @@ exports.userCart = async (req, res) => {
     //now add additional fields of interest
     object.count = cart[i].count; //attach count of current product
     //now get price for total
-    let { price } = await Product.findById(cart[i]._id)
-      .select("price")
-      .exec(); //get the product price from database NOT LOCAL STORAGE
+    let { price } = await Product.findById(cart[i]._id).select("price").exec(); //get the product price from database NOT LOCAL STORAGE
 
     object.price = price;
 
@@ -248,6 +246,10 @@ exports.getUserOrders = async (req, res) => {
         path: "brand",
         model: "Brand",
       },
+    })
+    .populate({
+      path: "orderedBy",
+      model: "User",
     })
     .sort({ createdAt: -1 })
     .exec();

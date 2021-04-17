@@ -9,16 +9,35 @@ const ShowPaymentInfo = ({ order, showStatus = true }) => {
         <div className="row">
           <div className="col-md-4 text-left">
             <p>
-              <span>
-                {" "}
-                <span className="font-weight-bold">Order ID:</span>{" "}
-                {order.paymentIntent.id}
-              </span>{" "}
-              <span>
-                <span className="font-weight-bold">Ordered On:</span>{" "}
-                {new Date(order.paymentIntent.created * 1000).toLocaleString()}
-              </span>
-              {"  "}
+              <p>
+                <span>
+                  {" "}
+                  <span className="font-weight-bold">Order ID:</span>{" "}
+                  {order.paymentIntent.id}
+                </span>{" "}
+                <span>
+                  <span className="font-weight-bold">Ordered On:</span>{" "}
+                  {new Date(
+                    order.paymentIntent.created * 1000
+                  ).toLocaleString()}
+                </span>{" "}
+              </p>
+              <p>
+                <span>
+                  <span className="font-weight-bold">Customer Email:</span>{" "}
+                  {order.orderedBy.email}
+                </span>
+                {"\n "}
+              </p>
+              <p>
+                <span>
+                  <span className="font-weight-bold">Delivery Address:</span>{" "}
+                  <p>{order.orderedBy.address.street} </p>
+                  {order.orderedBy.address.city}
+                  {", "}
+                  {order.orderedBy.address.state} {order.orderedBy.address.zip}
+                </span>{" "}
+              </p>
             </p>
             {showStatus && (
               <p>

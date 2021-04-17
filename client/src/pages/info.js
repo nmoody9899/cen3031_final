@@ -3,6 +3,7 @@ import React from 'react';
 import axios from 'axios';
 import { Link } from "react-router-dom";
 import './information/info.css';
+import ReactPlayer from "react-player"
 
 class DeleteHTTP {
 
@@ -131,6 +132,12 @@ class Info extends React.Component {
 
                 <h3>{post.title}</h3>
                 <p>{post.body}</p>
+                <div>
+                    <ReactPlayer
+                        url={post.body}
+                        controls={true}
+                    />
+                </div>
                 <p>Post ID Number: {post._id}</p>
 
 

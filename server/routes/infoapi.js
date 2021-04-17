@@ -1,3 +1,4 @@
+
 const express = require('express');
 
 const router = express.Router();
@@ -6,6 +7,8 @@ const BlogPost = require('../models/blogPost');
 
 
 // Routes
+
+
 router.get('/', (req, res) => {
 
     BlogPost.find({})
@@ -65,10 +68,11 @@ router.get('/name', (req, res) => {
     res.json(data);
 });
 
+
 ObjectID = require('mongodb').ObjectID;
 var db;
 
-router.get('/:id', (req, res) => {
+router.get('/infoapi/:id', (req, res) => {
     db = req.db;
 
     var newObjectId = new String(req.params.id)

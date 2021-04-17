@@ -59,7 +59,9 @@ readdirSync("./routes").map((rt) => app.use("/api", require("./routes/" + rt)));
 
 
 const port = process.env.PORT || 8000;
+
 app.use(express.json());
+
 app.use(express.urlencoded({ extended: false }));
 
 const inforoute = require('./routes/infoapi');
@@ -67,6 +69,7 @@ const inforoute = require('./routes/infoapi');
 
 
 app.use('/infoapi', inforoute);
+
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });

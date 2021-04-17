@@ -33,7 +33,8 @@ class Info extends React.Component {
         title: '',
         body: '',
         posts: [],
-        id: ''
+        id: '',
+        link: ''
     };
 
 
@@ -90,7 +91,8 @@ class Info extends React.Component {
 
         const payload = {
             title: this.state.title,
-            body: this.state.body
+            body: this.state.body,
+            link: this.state.link
         };
 
 
@@ -114,7 +116,8 @@ class Info extends React.Component {
         this.setState({
             title: '',
             body: '',
-            id: ''
+            id: '',
+            link: ''
         });
     };
 
@@ -125,16 +128,17 @@ class Info extends React.Component {
             return null;
         }
 
-
         return posts.map((post, index) => (
+
             <div key={index} className="blog-post__display">
 
 
                 <h3>{post.title}</h3>
                 <p>{post.body}</p>
+
                 <div>
                     <ReactPlayer
-                        url={post.body}
+                        url={post.link}
                         controls={true}
                     />
                 </div>
@@ -142,6 +146,7 @@ class Info extends React.Component {
 
 
             </div>
+
         ));
     };
 
@@ -165,6 +170,16 @@ class Info extends React.Component {
                                 value={this.state.title}
                                 onChange={this.handleChange}
                             />
+                        </div>
+                        <div className="form-input">
+                            <textarea
+                                placeholder="Link"
+                                name="link"
+                                value={this.state.link}
+                                onChange={this.handleChange}
+                            >
+
+                            </textarea>
                         </div>
                         <div className="form-input">
                             <textarea

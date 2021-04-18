@@ -4,7 +4,6 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "nodemon server/server.js",
-    "build": "cd client && npm start"
+    "start": "nodemon server/server.js"
   }
 }

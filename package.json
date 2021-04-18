@@ -5,7 +5,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "cd server && nodemon server.js",
+    "start": "nodemon server.js",
+	"build": "cd client/ && npm install && npm run build",
     "test": "jest",
     "lint": "eslint . && prettier-eslint --list-different **/*.js",
     "format": "prettier-eslint --write **/*.js"

@@ -5,6 +5,6 @@
   "description": "",
   "scripts": {
     "start": "nodemon server/server.js",
-    "build": "cd client && react-scripts start"
+    "build": "cd client && react-scripts start && react-scripts build"
   }
 }

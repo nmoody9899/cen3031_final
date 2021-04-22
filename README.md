@@ -8,9 +8,12 @@ Consider Herbs aims to educate and show people healthy and natural ways on how t
 
 Download Node.js from here: https://nodejs.org/en/download/
 
-Once you clone the repo navigate to the server folder on Terminal/Command line interface and run: \n
-npm ci \n
+Once you clone the repo navigate to the client and server directories on Terminal/Command line interface and run: 
+
+npm ci 
+
 npm install
+
 
 
 # Pages Information

@@ -6,6 +6,13 @@ Consider Herbs aims to educate and show people healthy and natural ways on how t
 
 # INCLUDE SECTION ON SET UP?
 
+Download Node.js from here: https://nodejs.org/en/download/
+
+Once you clone the repo navigate to the server folder on Terminal/Command line interface and run:
+npm ci
+npm install
+
+
 # Pages Information
 
 ## Home Page

@@ -1,3 +1,4 @@
+
 //entry point for server
 //these require entries import the relevant bits from node_modules
 const express = require("express");
@@ -22,19 +23,19 @@ const app = express();
 (Use `node --trace-deprecation ...` to show where the warning was created)
  */
 mongoose
-  .connect(process.env.DATABASE, {
-    useNewUrlParser: true,
-    useCreateIndex: true, //mongoDB deprecated ensureIndex()
-    //useFindAndModify: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false, //overcome deprecation warning in api/create-or-update-user
-  }) //promise comes back from connection
-  .then(() => {
-    console.log("DB CONNECT SUCCESS");
-  })
-  .catch((error) => {
-    console.log(`DB CONNECT ERROR: ${error}`);
-  });
+    .connect(process.env.DATABASE, {
+        useNewUrlParser: true,
+        useCreateIndex: true, //mongoDB deprecated ensureIndex()
+        //useFindAndModify: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false, //overcome deprecation warning in api/create-or-update-user
+    }) //promise comes back from connection
+    .then(() => {
+        console.log("DB CONNECT SUCCESS");
+    })
+    .catch((error) => {
+        console.log(`DB CONNECT ERROR: ${error}`);
+    });
 
 //middleware: functions that run that provide features
 app.use(morgan("dev")); //see status messages in terminal
@@ -55,8 +56,20 @@ readdirSync("./routes").map((rt) => app.use("/api", require("./routes/" + rt)));
 // });//get home page
 
 // port to run app
+
+
 const port = process.env.PORT || 8000;
 
+app.use(express.json());
+
+app.use(express.urlencoded({ extended: false }));
+
+const inforoute = require('./routes/infoapi');
+
+
+
+app.use('/infoapi', inforoute);
+
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+    console.log(`Server is running on port ${port}`);
 });

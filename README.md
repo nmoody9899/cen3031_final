@@ -30,12 +30,6 @@ The product page will allow users to purchase a variety of products, such as tin
 
 The information page will have integration through shared articles and social media platforms such as Instagram. The page will also allow videos to be embedded within. 
 
-## Testimony Page
-
-User testimonials will be shared to this page, whether they are verified customers or valued visitors of the site's various resources.
-
-ADDED: client/server primitives with basic user authentication and token passing between front and back-end (to run locally you'll have to remote lock files and npm install in directory)
-
 
 
 --------------------------PROJECT ACCOUNT INFORMATION BELOW--------------------------------

@@ -12,7 +12,7 @@ Once you clone the repo navigate to the client and server directories on Termina
 
 npm ci 
 
-npm install
+npm start
 
 
 

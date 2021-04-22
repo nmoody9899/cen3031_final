@@ -4,7 +4,7 @@ This repository holds the code used for the Consider Herbs web application. This
 
 Consider Herbs aims to educate and show people healthy and natural ways on how to take control of their own well-being. In order to accomplish this, Consider Herbs requires a storefront for users to purchase products, submit testimonials, and view relevant information to educate them on healthy lifestyles.  
 
-# Instructions for Local Set Up
+# Instructions For Local Set Up
 
 Download Node.js from here: https://nodejs.org/en/download/
 

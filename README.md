@@ -32,7 +32,7 @@ The information page will have integration through shared articles and social me
 
 
 
---------------------------PROJECT ACCOUNT INFORMATION BELOW--------------------------------
+# PROJECT ACCOUNT INFORMATION BELOW
 User Accounts for ecommerce FireBase:
 application.devadm@gmail.com RS2pgU7J8U3QYFH
 application.devuser1@gmail.com RS2pgU7J8U3QYFJ

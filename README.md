@@ -87,11 +87,8 @@ Database(collection): AppDevDbase.NodeAPI
 
 
 Cloudinary for Images (need URLs in database):
-
 application.devadm@gmail.com
-
 RS2pgU7J8U3QYFH!!
-
 Assigned Cloud Name: dqdpito3m
 
 
